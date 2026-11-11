@@ -153,7 +153,13 @@ Three search options come directly from the external claim and are available ind
 `--reverse` (right-to-left reading order), `--split <n>` (independent segments of the document) and
 `--exclude-numerals` (remove numeral-like glyphs from the word stream, since numerals encode dates).
 
-## 7. Fuzzy contextual search (short-circuit)
+## 7. Fuzzy contextual search (short-circuit — exploratory, not validated)
+
+> **Status: not validated for the Grover claim.** That claim reads as a two-part *synopsis* (an index of
+> events spanning ~120k words), so no contiguous passage is synonymous with it and the focus step cannot
+> legitimate a short-circuit. The default pipeline runs the exhaustive search. Keep the tool for claims
+> that really are passage translations; the synthetic test in `ContextualSearchTests` shows it recovers a
+> paraphrased passage when one exists.
 
 An external translation is a paraphrase, so it cannot be used as a phrase key. `bomca focus` locates the
 corpus regions where a paraphrase belongs and writes a focus file; `bomca match --focus` restricts the

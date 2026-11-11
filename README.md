@@ -85,10 +85,11 @@ independent of the claim:
 Three search variants are also available because of his method: `--reverse` (he reads right-to-left),
 `--split 2` (two independent texts) and `--exclude-numerals` (numerals carry dates, not words).
 
-Because his translation is a paraphrase rather than corpus phrasing, `bomca focus` runs a
-lemma-aware, IDF-weighted fuzzy search for where each segment *belongs* (Mosiah 5 and 3 Nephi 1 for the
-two segments, p = 0.024), then `match --focus-auto` searches only those 3,100 words. That is 86x less
-corpus and 23x faster window scanning, with a better best-passage score (0.445 vs 0.377 unrestricted).
+`bomca focus` (lemma-aware, IDF-weighted paraphrase search) locates where such a text *belongs* and can
+restrict the symbol search to those regions. **It is not validated for Grover's claim:** his reading is a
+two-part synopsis of events spanning ~120k words, not a passage translation, so no contiguous window is
+synonymous with it. The retrieved windows are era-adjacent, not text-matching, and the default pipeline
+therefore runs the exhaustive search. See `docs/findings.md` for the sentence-by-sentence comparison.
 
 ## Design decisions
 

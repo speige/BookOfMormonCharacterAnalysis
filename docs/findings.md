@@ -2,6 +2,65 @@
 
 Append-only. Newest run first. Every number here is reproducible with the commands shown.
 
+## 2026-02-11 — is the retrieved text actually synonymous with his translation? (No.)
+
+The user pointed out the methodological error: "era" is not evidence, and the Book of Mormon is not a
+strict chronology — it references past and future events throughout. The only thing that counts is
+whether the retrieved *text* says the same thing with different wording. It does not.
+
+### Top segment (his eleven sentences) vs everything the search could offer
+
+| His proposition | Corpus reality |
+|---|---|
+| Mosiah I leaves in his 19th regnal year, over the mountains to the people of Mulek | Omni 1:12–13, 15: Mosiah flees the land of Nephi into the wilderness to Zarahemla; the people there "came out from Jerusalem" (Mulek is named in Helaman 6:10, 8:21). No regnal year, no "over the mountains". |
+| 20,000 people; 11 days; 80 days downriver on the east side of Sidon | **Not stated anywhere.** Omni gives no numbers, route or duration. |
+| After 11 years, the "Period of the Seven Tribes" begins | **No such period.** `tribes` occurs 20× but never in this sense; `jubilee` occurs **0×** in the whole book. |
+| Zeniff departs with sixty of his people | Zeniff exists (Mosiah 7:9, 9:1) but no company of sixty and no departure year. |
+| 53 years pass; Limhites take the twenty-four plates from the land of Desolation | The 24 plates are real (Mosiah 8:9, 21:25–28, Ether 1:2) but are brought *by Limhi's people from the land of Nephi*, not from "the West", and no 53 years is attached. |
+| Seven years later the pure gold plates reach Mosiah2, who translates them | Mosiah 21:28–28:17: Limhi's people bring the plates; Mosiah translates "by the gift and power of God". `pure gold` occurs 3× but never with these plates. |
+| **Benjamin made king in month 2 of year 436 after Lehi left; dies aged 83 in year 479, 1⅓ years before the Limhites** | **Mosiah 6:4–5 exactly:** "Mosiah began to reign… making in the whole, about *four hundred and seventy-six years* from the time that Lehi left Jerusalem. And king Benjamin lived *three years* and he died." 476 + 3 = 479. This one is a genuine hit. |
+
+Net: **one proposition out of eleven** matches the corpus, and it is the one that is a date
+computation rather than a narrative — a date a translator could derive from the text and then "read"
+back into the glyphs. Everything that makes his top segment distinctive (20,000, 11 days, 80 days,
+seven tribes, sixty people, 53 years, jubilee) is absent from the Book of Mormon.
+
+### Bottom segment vs everything the search could offer
+
+Here the picture is different in kind, not degree: every proposition in his list exists, in order,
+somewhere — Samuel's five years and darkness (Helaman 13–14), the nine-year reckoning change (3 Nephi
+2:7–8), the 92nd year and two days without darkness (3 Nephi 1:15–19), the Gadianton robbers
+(3 Nephi 1:27–29), the 34th year, first month, darkness and Christ's coming (3 Nephi 8:5–23), the
+period of peace (4 Nephi 1:1–18), riches and the fourth generation (4 Nephi 1:23–26, 43–45), the
+retreat north and the three disciples (4 Nephi 1:34–37), Lamanites without Christ (4 Nephi 1:38;
+Mormon 1:13–14), 384 years (Mormon 6:5).
+
+But they are spread across **Helaman 13 → Mormon 6**, roughly 120,000 words. No 2,000-word window
+contains them, and none of the windows the search returned reads like his text.
+
+### The consequence for the algorithm
+
+His reading is not a passage translation; it is a **two-part synopsis**: a chronological index of
+events from Omni/Mosiah through Mormon. That has two consequences:
+
+1. **No contiguous match can ever exist.** A synopsis of a hundred thousand words is not synonymous
+   with any paragraph, so "find the paragraph, then align the glyphs" cannot validate or refute it.
+   The absence of a striking resemblance is therefore *expected* under his hypothesis — it is not
+   evidence for it, but it does mean this test cannot settle the question.
+2. **The right test is set-matching, not window-matching.** A synopsis predicts a *scattered set* of
+   verses whose relative glyph patterns should match the document's repeated symbols, with large
+   gaps between them. That is a different scanner from anything currently implemented (the existing
+   scanners assume a contiguous span). It is the correct next algorithmic step for a synopsis-style
+   claim.
+
+### Status of the short-circuit
+
+`bomca focus` is **not validated** for this claim and is not used by default. The hypothesis is not
+solidified, so the pipeline runs the exhaustive search. The focus code stays in the tool because the
+technique is sound in general (it recovers a planted paraphrase in the tests, and any claim that *is*
+a passage translation can use it), but for Grover's synopsis it would just restrict the search to the
+wrong thousand words.
+
 ## 2026-02-11 — fuzzy contextual search (short-circuiting the exhaustive scan)
 
 Command: `bomca focus --source grover` then `bomca match --doc W --focus-auto`.
