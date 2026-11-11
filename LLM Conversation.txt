@@ -1,0 +1,1993 @@
+You said:
+Uplo
+This is a copy of a shared ChatGPT chat. It won't be added to memory.
+Report conversation
+Yesterday 11:35 PM
+Log in
+Ask ChatGPT
+11/11/26, 2:06 AM Caractors Decipherment Approach
+https://chatgpt.com/share/6af42fe6-83e8-83e8-b4e4-5ec0879c9720 1/52
+I'm wondering if you can help me make some guestim
+this attachment which is the 'Caractors' document.
+I'm curious about any scholarship which might try to m
+specific book of mormon verse or chapter. I'm also cu
+making my own attempt.
+I assume the symbols don't match any known languag
+have a knowledge of possible matches that scholars h
+However, I wonder if we consider general categories o
+and how they typically work if we can decipher some
+My thought is that if we guessed how one symbol mig
+converted into one word or phrase, and then we used
+successive approximation search by hypothesizing a p
+by taking a common symbol from the document and
+symbol from the english text and then looking at surr
+metrics of relative distance to next matching symbol t
+match. For example, there's a symbol that looks simila
+'H' if we hypothesized that was 'And it came to pass' t
+scan the entire english text for relative distances betw
+phrase to get a numerical fingerprint and then we cou
+same search over this small caractors document and s
+any possible match (not exact numbers but relative pa
+example if the caracters has 4 matches and the distan
+each time, then we need a set of 4 in english where th
+gets larger each time). We likely won't find any match
+list of the most common caractors and most common
+phrases and rank them in priority order, then do a car
+product to average their ranks (to ensure our search p
+most likely candidates), then iterative over the search
+maybe eventually we find some possible matches? Th
+a few hypotheses for each caractor we should be able
+the results together to verify our hypotheses because
+a multi-variate equation and if you find possible value
+values and there's a tuple that cross-validate each oth
+an extremely high probability of a correct reverse tran
+also if we can prove a few caractors it should be relati
+find the exact verse or chapter and then slowly deciph
+remaining symbols.
+For this approach to have any chance of success, we'd
+guestimate possible language rules to ensure our sea
+parameters are accurate. For example, language trans
+always keep words in the same order (spanish puts ad
+noun english puts it beforehand), but also languages
+have building blocks on a single symbol so extremely
+symbols might have very different meanings, due to a
+stroke change.
+Some information that I think would be helpful to ana
+coming up with a search metric is information from sc
+research about where this document came from and w
+plates looked like and how the translation process wa
+For example, Nephi claims that wrote his record using
+learning of the Jews and the language of the Egyptian
+might be useful for languages to consider for potentia
+11/11/26, 2:06 AM Caractors Decipherment Approach
+https://chatgpt.com/share/6af42fe6-83e8-83e8-b4e4-5ec0879c9720 2/52
+ChatGPT said:
+patterns, however I'm unsure if we have proof that the
+remained the same up until Moroni & Mormon, and w
+necessarily know which english chapter of the text mig
+with this.
+Scholars believe this document is in John Whitmer ha
+he was one of the 8 witnesses, so it seems he would h
+them while physically looking at the plates. Is there an
+record about such an event that might give any clues?
+If there are journal entries about the number of plates
+(excluding the lost pages and the sealed portion), we
+to guess the compression level of the characters by es
+total number of symbols that might fit on a plate and
+that to the english text. Then if we have the ratio it mi
+guess as to the writing style.
+Royal skousen thinks joseph essentially saw the transl
+urim and thummim in a group of approximately 20 wo
+That might give us a clue as well, but we probably don
+many symbols the urim and thummim was able to fit
+how often joseph turned a gold leaf to the next page,
+words at a time may be a meaningless clue.
+Maybe journal entries our hypothesis is
+I think this is a genuinely interesting research project, and I would approach it so
+differently from a conventional attempt to translate the Caractors document.
+Your proposed idea of using statistical fingerprints, relative distances, frequency
+cross-validation is reasonable. In fact, it has some parallels with computational c
+and statistical approaches to deciphering unknown writing systems.
+There is one particularly important distinction I'd make before we start:
+We need to determine whether the Caractors document is a sample of the orig
+system, a transcription of the writing system, or an attempt to represent the c
+using someone's imperfect recollection.
+Those three possibilities lead to very different expectations for a successful algo
+For example, if John Whitmer copied characters directly from the plates, we mig
+reasonably consistent character shapes and spacing. If he copied an earlier trans
+might instead be analyzing the peculiarities of the person who made that transc
+the document is a collection of selected characters rather than a continuous pas
+sequential-distance algorithm would need substantial modification.
+I'd organize this investigation into five parts:
+1. Historical provenance: who created the document, when, and under what ci
+2. Physical evidence: what do we know about the plates, their dimensions, insc
+number of characters?
+3. Translation process: what do the historical accounts actually tell us about ho
+Smith translated?
+4. Linguistic hypotheses: what writing systems and language structures are pla
+Worked for 55s
+11/11/26, 2:06 AM Caractors Decipherment Approach
+https://chatgpt.com/share/6af42fe6-83e8-83e8-b4e4-5ec0879c9720 3/52
+5. Computational experiment: how to build a search algorithm that can test hy
+without accidentally finding meaningless statistical coincidences.
+I would also keep two questions separate throughout: Can we identify a passag
+plausibly corresponds to the document? And Can we actually recover the mea
+characters? The first is considerably easier.
+1. The most important historical discovery: the document's pro
+There is a scholarly paper that I think should become the foundation of our inve
+Michael Hubbard MacKay, Gerrit J. Dirkmaat, and Robin Scott Jensen, "The 'Ca
+Document: New Light on an Early Transcription of the Book of Mormon Chara
+Published in Mormon Historical Studies, volume 14, number 1.
+Read the full scholarly paper (PDF)
+This paper is particularly important because it challenges several assumptions ab
+the document.
+Who wrote it?
+The authors conclude that:
+The title "Caractors" was written by John Whitmer, not Joseph Smith.
+The characters themselves were probably also written by John Whitmer.
+X-ray fluorescence testing found that the ink in the title and characters was
+compositionally consistent, supporting the conclusion that they were writte
+same time.
+The document was likely created sometime after June 1829.
+The handwriting analysis is fairly compelling. The researchers compare individua
+writing angles, pen pressure, and other distinctive characteristics against known
+John Whitmer's handwriting.
+This is important because David Whitmer had previously believed that Joseph Sm
+had written the document.
+Was John Whitmer copying directly from the plates?
+Here's where things get interesting.
+The authors believe the document was itself copied from another, larger docum
+There are several clues:
+1. The title was written first, and the characters were subsequently arranged ar
+2. The characters become progressively smaller as the writer moves down the
+3. More characters fit on each successive line.
+4. The spacing becomes increasingly cramped.
+This suggests John Whitmer was copying an existing transcription and trying to
+the available space.
+The authors hypothesize that the document was created around early 1831, whe
+Whitmer was preparing to travel to Kirtland, Ohio.
+They discovered that the paper originally had another purpose: it was apparently
+wrapper for a manuscript of Joseph Smith's revision of Genesis, titled The Book o
+Generation of Adam.
+11/11/26, 2:06 AM Caractors Decipherment Approach
+https://chatgpt.com/share/6af42fe6-83e8-83e8-b4e4-5ec0879c9720 4/52
+The characters were copied onto a folded section of this wrapper.
+This also explains why the document's surviving portion is misleading. The origin
+considerably larger, and the current fragment represents only part of it.
+The Joseph Smith Papers Project has since published an official archival descript
+Joseph Smith Papers — Characters Copied by John Whitmer, circa 1829–1831
+It confirms the handwriting attribution as probable rather than absolutely certain
+documents the physical condition and history of the artifact. The Church of Jesu
+Latter-day Saints acquired the document from Community of Christ in 2024. It is
+the Church History Library. Joseph Smith… +1
+Why this changes our investigation
+I would distinguish three different historical documents:
+There is an important complication: the surviving Caractors document has never
+conclusively identified as the exact document Martin Harris took to Anthon.
+In fact, the scholarly paper argues that it probably isn't.
+Charles Anthon described a document with characters arranged in columns, alon
+illustrations of moons, stars, and other objects. The Caractors document has seve
+lines and doesn't match that description.
+The authors also point out that multiple transcriptions of the characters circulate
+Church. Some were made by Joseph Smith, Martin Harris, Emma Smith, Oliver Co
+potentially Reuben Hale.
+Consequently, we shouldn't assume that the seven lines in Caractors represent a
+passage from the Book of Mormon. They might represent a selection of characte
+a larger transcription.
+Document Historical significance
+Joseph Smith's original character copies Potentially copied from the plates
+Martin Harris's character transcription The document taken to Charles Anthon
+John Whitmer's Caractors Probably a later copy of an earlier transc
+11/11/26, 2:06 AM Caractors Decipherment Approach
+https://chatgpt.com/share/6af42fe6-83e8-83e8-b4e4-5ec0879c9720 5/52
+That is probably the single biggest obstacle to your proposed statistical approac
+My recommendation: We should investigate whether the document represents
+passage before attempting to match its character sequence to English scripture.
+If it does, your approach becomes much more promising. If it doesn't, we need a
+statistical model.
+2. What do we know about the plates themselves?
+There are several historical accounts describing the physical plates, although we
+distinguish eyewitness recollections from measurements made contemporaneou
+The witnesses generally described plates approximately six to eight inches in the
+principal dimensions.
+Here are some reported measurements:
+The descriptions of thickness also vary:
+Martin Harris compared them to thin leaves of gold and tin plates.
+David Whitmer compared individual leaves to parchment.
+Emma Smith described them as pliable, like thick paper.
+Orson Pratt described them as not quite as thick as common tin.
+The reported total weight was approximately 40–60 pounds.
+These are retrospective accounts, not modern physical measurements. Scripture C
+How many characters could fit?
+This is where I think we can do something interesting.
+A particularly useful paper is:
+Bruce E. Dale, "How Big A Book? Estimating the Total Surface Area of the Book
+Mormon Plates."
+Read the paper — Interpreter: A Journal of Latter-day Saint Faith and Scholarship
+The author estimates that the plates probably had between 30 and 86 square fee
+inscribed surface area.
+For perspective, that's approximately 15% of the surface area of the paper on wh
+Book of Mormon is printed.
+This is an estimate, not an established physical measurement. Scripture Central
+We can use that estimate to investigate several competing writing-system hypot
+For example:
+Witness Reported dimensions
+Joseph Smith Approximately 6 × 8 inches
+Martin Harris Approximately 7 × 8 inches
+David Whitmer Approximately 8 × 6–7 inches
+Orson Pratt Approximately 7 × 8 inches
+11/11/26, 2:06 AM Caractors Decipherment Approach
+https://chatgpt.com/share/6af42fe6-83e8-83e8-b4e4-5ec0879c9720 6/52
+Alphabetic writing: many symbols required to express a passage.
+Syllabic writing: fewer symbols, with each symbol representing a syllable.
+Logographic writing: potentially substantially fewer symbols, with symbols r
+words or morphemes.
+Mixed writing: some symbols representing sounds, others representing wor
+grammatical elements.
+The compression ratio could help eliminate some hypotheses, although it won't
+language by itself.
+One caveat: we don't know the precise number of plates, the exact percentage o
+that was sealed, or the actual density of the writing. We also shouldn't assume th
+English text occupies the same amount of textual space as its source.
+A calculation I'd like to perform eventually
+Suppose we establish:
+Estimated number of inscribed surfaces.
+Average usable surface area per plate.
+Average characters per square inch.
+Estimated total characters.
+Number of English words in the corresponding Book of Mormon text.
+We could calculate:
+This would give us a rough compression ratio.
+We could then compare that ratio against known writing systems and their typic
+textual density.
+I would give this exercise a relatively low confidence level because several inputs
+but it could still help prioritize linguistic models.
+3. What does the Book of Mormon tell us about the language?
+I think your instinct to investigate Egyptian and Hebrew is correct, but we need t
+about what the scriptures actually establish.
+There are three particularly important passages.
+1 Nephi 1:2
+Nephi says:
+Mormon 9:32
+Moroni describes the writing system as reformed Egyptian.
+Mormon 9:33
+R = estimated original characters
+English words
+Yea, I make a record in the language of my father, which consists of the learnin
+and the language of the Egyptians.
+11/11/26, 2:06 AM Caractors Decipherment Approach
+https://chatgpt.com/share/6af42fe6-83e8-83e8-b4e4-5ec0879c9720 7/52
+Moroni explains that the characters had been handed down and modified over t
+their writing system had become different from the Egyptian and Hebrew of the
+There are some interesting implications.
+Hypothesis A: Egyptian script representing Hebrew language
+This is one possibility.
+A writing system can borrow the symbols of another language while representin
+spoken language.
+For example, Egyptian symbols could theoretically represent Hebrew words, sylla
+or consonants.
+This would mean our computational model shouldn't necessarily compare Egypt
+structures with the English translation. We might need to consider Hebrew lingu
+represented through an Egyptian-derived script.
+Hypothesis B: A hybrid writing system
+Another possibility is that the Nephites used a combination of Egyptian and Heb
+writing conventions.
+For example:
+Egyptian-derived symbols.
+Hebrew grammatical conventions.
+Potentially alphabetic and logographic elements.
+Some symbols representing sounds, others representing words or
+grammatical components.
+This is speculative, but it's worth testing as a separate hypothesis.
+Hypothesis C: A heavily modified Egyptian writing system
+The description of reformed Egyptian could also suggest a writing system that e
+considerably over the centuries.
+This is especially relevant because the document could contain characters from a
+period than Nephi's original writing.
+In other words, we shouldn't assume that the writing of Moroni looked exactly li
+of Nephi.
+There is scholarship exploring possible relationships between Egyptian scripts an
+Hebrew scribal practices.
+A particularly interesting paper is Neal Rappleye's Learning Nephi's Language: Cr
+Context for 1 Nephi 1:2.
+Read the paper — Learning Nephi's Language .
+It discusses the possibility of a Judahite scribal tradition using hieratic Egyptian,
+potential mixing of Egyptian script with Hebrew scribal conventions.
+This is a proposed historical model, not a demonstrated identification of the Boo
+script. Book of Mor… +1
+11/11/26, 2:06 AM Caractors Decipherment Approach
+https://chatgpt.com/share/6af42fe6-83e8-83e8-b4e4-5ec0879c9720 8/52
+An important distinction for our algorithm
+I would explicitly separate:
+We might have Egyptian-looking characters representing Hebrew words, for exa
+That would make an attempt to identify the script based solely on visual resemb
+potentially misleading.
+Also, a single character might represent:
+A consonant.
+A syllable.
+A complete word.
+A grammatical marker.
+A combination of sounds.
+We shouldn't assume a one-character-to-one-English-word mapping.
+4. What does the translation process tell us?
+Your reference to Royal Skousen is particularly useful.
+His 1997 paper is:
+"How Joseph Smith Translated the Book of Mormon."
+Read Royal Skousen's paper at BYU ScholarsArchive .
+Skousen examines the original manuscript, printer's manuscript, and historical st
+from witnesses.
+One of his conclusions is that Joseph was working with groups of at least approx
+words at a time.
+He also argues that the original manuscript reflects a dictation process in which
+apparently received specific words and letters rather than simply translating gen
+his own vocabulary. BYU ScholarsArc…
+Grant Hardy's more recent discussion of the translation process provides useful
+additional context:
+The Book of Mormon Translation Process — BYU Studies .
+Hardy discusses the distinction between loose control, tight control, and iron-cla
+theories of translation.
+Could the 20-word groups help us?
+Potentially, but I wouldn't use them as an initial constraint.
+Here's why.
+Concept Meaning
+Script The visual symbols used to write
+Language The spoken or written linguistic system
+Orthography The rules for representing the language in writing
+Translation Converting meaning from one language into another
+11/11/26, 2:06 AM Caractors Decipherment Approach
+https://chatgpt.com/share/6af42fe6-83e8-83e8-b4e4-5ec0879c9720 9/52
+If Joseph was receiving approximately 20 English words at a time, that doesn't
+necessarily mean:
+The corresponding source text contained 20 characters.
+The source text was divided into groups of 20 characters.
+Joseph was translating one physical line at a time.
+The translation instrument displayed exactly 20 words simultaneously.
+We don't have enough historical evidence to establish those things.
+However, there's an interesting possibility.
+If the translation was revealed in groups of approximately 20 English words, and
+eventually identify the corresponding source passage, we could investigate whet
+groupings or physical divisions in the writing system correlate with those transla
+That would be a secondary experiment, not an initial assumption.
+Did John Whitmer record copying the characters?
+This is another area where we need to distinguish evidence from inference.
+John Whitmer was one of the Eight Witnesses. He testified that Joseph Smith sho
+plates, which he handled.
+He also briefly assisted Joseph as a scribe during the Book of Mormon translatio
+However, I haven't found a contemporary journal entry in which John Whitmer e
+that he copied the characters directly from the physical plates.
+The archival research instead suggests that he copied the characters from anoth
+The most interesting historical evidence is actually the paper's physical history a
+handwriting analysis, rather than a journal account of the copying event.
+The Joseph Smith Papers description documents these uncertainties and the like
+circumstances of its creation. Joseph Smith… +1
+Another important resource
+The Church's official essay on translation is worth reading because it collects ma
+firsthand and retrospective accounts:
+Book of Mormon Translation — Gospel Topics Essays .
+It discusses:
+Joseph's own descriptions.
+Accounts from Emma Smith.
+David Whitmer's recollections.
+The use of the interpreters and seer stone.
+The original manuscript and dictation process.
+One thing I'd caution against is treating every later account as equally reliable. S
+were recorded decades after the events, and some witnesses disagreed about th
+of translation.
+11/11/26, 2:06 AM Caractors Decipherment Approach
+https://chatgpt.com/share/6af42fe6-83e8-83e8-b4e4-5ec0879c9720 10/52
+5. Evaluating your statistical decipherment idea
+Now to what I think is the most exciting part of this project.
+I would absolutely experiment with your approach, but I would make a few chan
+the algorithm.
+First, let's define the problem mathematically.
+Suppose we have a document containing an unknown sequence:
+And an English Book of Mormon text:
+We want to find a mapping between symbols in and linguistic elements in .
+Your proposed method is to hypothesize that a particular character represents a
+English word or phrase, then look for corresponding patterns of repeated occurr
+This is a good starting point, but there are several complications.
+Problem 1: Repeated characters aren't necessarily repeated words
+Suppose we find a symbol that appears four times.
+We might hypothesize that it represents "and."
+But what if the underlying writing system is syllabic?
+The symbol might represent "ka," and therefore occur inside many different wor
+Or it might be a grammatical suffix that appears frequently regardless of the Eng
+in translation.
+This means we should test several models:
+We shouldn't force one model to explain every character.
+Problem 2: Translation changes word order
+You've already identified this.
+Suppose the source language uses:
+[God] [the] [son]
+And English uses:
+C = (c , c , … , c 1 2 n)
+E = (e , e , … , e 1 2 m)
+C E
+Model Symbol represents Example
+Alphabetic A sound or consonant K
+Syllabic A syllable Ka
+Logographic A complete word And
+Morphological A grammatical unit Plural ma
+Mixed Different types of units Combinat
+11/11/26, 2:06 AM Caractors Decipherment Approach
+https://chatgpt.com/share/6af42fe6-83e8-83e8-b4e4-5ec0879c9720 11/52
+[the] [son] [of] [God]
+A positional comparison will fail.
+But we can use more sophisticated metrics.
+For example, rather than comparing exact positions, we can compare:
+Relative ordering.
+Relative distances.
+Frequency distributions.
+Repeated subsequences.
+Co-occurrence patterns.
+Local density of recurring symbols.
+Some of these properties survive translation better than others.
+Problem 3: A single symbol might have multiple meanings
+This is particularly important for logographic and morphologically complex writi
+We shouldn't assume:
+Instead, we should allow:
+In other words, a symbol might correspond to different English words depending
+The inverse is also possible: multiple symbols might represent the same English
+Problem 4: The English translation isn't necessarily structurally faithfu
+Even if Joseph received the translation word for word, we don't know that the En
+preserve the original language's word boundaries, grammatical structure, or syn
+Skousen's tight-control hypothesis concerns the revelatory process, not necessa
+word-for-word structural equivalence between source and target languages.
+This is an important distinction.
+6. How I would build the search algorithm
+I would approach this as a sequence of increasingly sophisticated experiments.
+Phase 1: Build a character inventory
+First, we need to digitize the Caractors document.
+I'd manually identify each distinct character and assign it an ID.
+For example:
+Illustrative character inventory
+f(ci ) = w j
+f (c i) = {w , w , … , w 1 2 k}
+11/11/26, 2:06 AM Caractors Decipherment Approach
+https://chatgpt.com/share/6af42fe6-83e8-83e8-b4e4-5ec0879c9720 12/52
+𐌇C001 ⌁C002
+ϟ
+C003
+⋔C005 ∿C006 ⌖C007
+Illustrative placeholders only, not actual transcriptions of the document.
+We should also record:
+Character frequency.
+Approximate shape.
+Orientation.
+Whether it appears to be a variant of another character.
+Position within the document.
+Confidence in the transcription.
+One important detail: I would not automatically merge visually similar characters
+preserve the original shapes and allow the algorithm to test whether they are va
+Phase 2: Build an English corpus
+We need the entire Book of Mormon in machine-readable form.
+I'd include at least three representations:
+1. Original 1830 English text.
+2. Current English text.
+3. A normalized version with punctuation removed and standardized spelling.
+Why the 1830 text?
+Because it is closer to the translation produced in 1829, although it still contains
+changes made before publication.
+The current edition is useful for comparison, but I wouldn't make it our only corp
+I'd also preserve verse boundaries, chapter boundaries, and book boundaries.
+Phase 3: Rank potential English phrases
+This is where your Cartesian-product idea becomes useful.
+We can calculate the frequency of:
+Individual words.
+Two-word phrases.
+Three-word phrases.
+Four-word phrases.
+Longer recurring phrases.
+For example, the candidate list might contain:
+Candidate phrase Relative frequency
+And it came to pass Very high
+And behold High
+And it came High
+11/11/26, 2:06 AM Caractors Decipherment Approach
+https://chatgpt.com/share/6af42fe6-83e8-83e8-b4e4-5ec0879c9720 13/52
+These rankings should be calculated from the actual Book of Mormon corpus, no
+We can then combine the phrase rankings with character rankings.
+For example:
+Where:
+is a candidate character.
+is a candidate English phrase.
+This is a useful prioritization heuristic, although it isn't a probability of correctnes
+Phase 4: Build relative-distance fingerprints
+This is the heart of your proposed approach.
+Suppose a particular character occurs four times:
+Its distances are:
+Notice the increasing distances.
+Now suppose the phrase "and it came to pass" occurs at positions:
+Its distances are:
+That's a perfect match under our hypothetical example.
+Of course, actual comparisons would need to account for:
+Different text lengths.
+Missing characters.
+Translation expansion or compression.
+Different character-to-word ratios.
+Unknown word boundaries.
+I'd compare normalized distance patterns rather than exact distances.
+And now High
+And the Lord High
+And it was High
+And they did Medium
+Score(c, p) = Rank(c) + Rank(p)
+c
+p
+C x = [5, 12, 24, 45]
+D x = [7, 12, 21]
+E p = [100, 107, 119, 140]
+D p = [7, 12, 21]
+11/11/26, 2:06 AM Caractors Decipherment Approach
+https://chatgpt.com/share/6af42fe6-83e8-83e8-b4e4-5ec0879c9720 14/52
+For instance:
+This gives:
+And the same for the English candidate.
+We could then calculate a distance between the two normalized vectors.
+This is much better than requiring exact positional matches.
+Phase 5: Cross-validation
+Here's where I particularly like your idea.
+Suppose we discover:
+Character A plausibly corresponds to "and."
+Character B plausibly corresponds to "the."
+Character C plausibly corresponds to "Lord."
+Individually, each hypothesis might have several possible matches.
+But when combined, we can search for passages in which all three occur with the
+relative relationships.
+This becomes a constraint satisfaction problem.
+We can represent the hypotheses as:
+And evaluate the combined likelihood:
+The key is that we should calculate the joint evidence, not simply multiply indep
+probabilities. These character occurrences and English words aren't independent
+A good candidate passage should explain multiple character patterns simultaneo
+If one mapping works for one character but makes the other mappings impossib
+be rejected.
+My preferred approach Use multiple independently recurring characters as simulta
+constraints rather than trying to decipher one character at a time.
+That is probably the strongest feature of your proposed methodology.
+Phase 6: Statistical significance and protection against false matches
+There's one problem with this entire approach that I want to emphasize.
+N (D) =
+ΣD
+D
+N (D x) = [0.175, 0.30, 0.525]
+H = (h , h , h A B C,…)
+P (H ∣ C, E)
+11/11/26, 2:06 AM Caractors Decipherment Approach
+https://chatgpt.com/share/6af42fe6-83e8-83e8-b4e4-5ec0879c9720 15/52
+If we try enough character mappings against enough English phrases, we'll even
+impressive-looking coincidences.
+For example, a random sequence of four distances might happen to resemble a
+phrase's occurrence pattern.
+We need a way to distinguish meaningful matches from coincidences.
+I'd introduce three safeguards.
+1. Randomized controls
+Generate thousands of random character sequences with the same character fre
+the Caractors document.
+Run the same search algorithm against them.
+If our real document produces a match score of 95, but randomized documents
+produce scores of 93–97, our result isn't impressive.
+2. Independent validation
+Divide the document into sections.
+Use some sections to generate hypotheses and reserve others for testing.
+A hypothesis that only works on the data used to discover it isn't particularly con
+3. Multiple-model comparison
+Run the same experiment under different assumptions:
+One character = one English word.
+One character = one syllable.
+One character = one consonant.
+One character = one grammatical marker.
+Multiple characters = one word.
+One character = multiple possible meanings.
+If one model consistently outperforms the others, that becomes meaningful evid
+I'd also consider a sequence-alignment algorithm, such as a pair hidden Markov
+than relying exclusively on relative distances. It can accommodate insertions, del
+expansions in the translated text.
+7. One major issue: what if Caractors isn't a continuous passag
+I want to return to this because it could determine whether the project succeeds
+The historical research suggests that Caractors was copied from a larger transcri
+But we don't know whether that larger transcription represented:
+1. A continuous passage from the plates.
+2. A collection of selected characters.
+3. An alphabet or character reference.
+4. A combination of characters and translated material.
+5. A collection of characters copied from different portions of the plates.
+These possibilities are dramatically different.
+11/11/26, 2:06 AM Caractors Decipherment Approach
+https://chatgpt.com/share/6af42fe6-83e8-83e8-b4e4-5ec0879c9720 16/52
+If it is an alphabet or collection of selected characters, searching for sequential m
+the English Book of Mormon would be fundamentally flawed.
+However, we might still be able to identify the writing system's structure through
+frequencies, recurring combinations, and other linguistic features.
+I would actually build two separate algorithms:
+Algorithm A: Sequential decipherment
+Assumes the document represents a continuous passage.
+Uses:
+Relative distances.
+Character sequences.
+N-gram frequencies.
+Phrase matching.
+Sequence alignment.
+Algorithm B: Non-sequential decipherment
+Assumes the document contains selected characters.
+Uses:
+Character frequency.
+Character co-occurrence.
+Shape similarity.
+Potentially repeated grammatical or phonetic structures.
+Statistical comparison against candidate writing systems.
+We can run both without prematurely committing to either historical interpretat
+8. My proposed research priorities
+Here's how I'd prioritize the remaining research.
+I would also investigate whether the surviving document can be compared with
+historical character transcriptions.
+The 1844 Stick of Joseph broadside is especially interesting because it contains c
+overlap with the first three lines of Caractors.
+Priority Research question Why it matters
+1 Is Caractors a continuous passage? Determines our algorithm
+2 What was the original source document? Determines whether we have
+or selection
+3 What is the most plausible script family? Narrows linguistic models
+4 How much compression could the writing
+system achieve?
+Helps estimate symbol-to-wo
+5 What is the likely source-language structure? Helps with translation alignme
+6 Can we find recurring character patterns? Provides candidate mappings
+7 Can we identify a matching Book of
+Mormon passage?
+Tests the overall hypothesis
+11/11/26, 2:06 AM Caractors Decipherment Approach
+https://chatgpt.com/share/6af42fe6-83e8-83e8-b4e4-5ec0879c9720 17/52
+There are also character documents attributed to Oliver Cowdery and Frederick G
+These could potentially help us reconstruct an earlier transcription and identify w
+multiple copies preserve the same sequence.
+The MacKay, Dirkmaat, and Jensen paper discusses these documents and their re
+9. What I would actually do next
+I think we have enough historical background to begin an actual computational
+but I'd resist immediately trying to decipher the document.
+I'd start by creating a dataset.
+Proposed research project
+Caractors Decipherment Experiment
+Proposed development sequence
+One additional idea: don't restrict the English
+corpus to the Book of Mormon initially
+This is a subtle but potentially important point.
+If the writing system was used over approximately 1,000 years, the Caractors doc
+conceivably represent text from a different period than the passage we initially e
+We should eventually consider whether its contents might correspond to:
+Nephi's writings.
+Mormon's abridgment.
+Moroni's writings.
+The Jaredite record.
+Digitize Caractors
+Create a character-by-character transcription, including coordinates, varia
+confidence scores.
+Reconstruct historical copies
+Compare the 1844 broadside and surviving transcriptions attributed to Jo
+Oliver Cowdery, and Frederick G. Williams.
+Build the Book of Mormon corpus
+Index the 1830 edition and current edition, including word and phrase fre
+Generate candidate mappings
+Rank character-to-word, character-to-phrase, and character-to-linguisticunit
+hypotheses.
+Run statistical searches
+Test relative distances, sequence alignment, and cross-character constrain
+Evaluate significance
+Compare results against randomized controls and independent validation
+1
+2
+3
+4
+5
+6
+11/11/26, 2:06 AM Caractors Decipherment Approach
+https://chatgpt.com/share/6af42fe6-83e8-83e8-b4e4-5ec0879c9720 18/52
+A title, heading, or other non-narrative text.
+I wouldn't search the entire corpus with equal priority, but I wouldn't eliminate a
+possibilities prematurely.
+10. My overall assessment
+I see three particularly promising aspects of this investigation.
+First: The historical provenance is more complicated than most people realize.
+The handwriting and archival research give us a much better understanding of w
+surviving document actually is. But they also make it less certain that we have a c
+transcription of the plates.
+Second: Your statistical approach is worth pursuing.
+I especially like the idea of using multiple character mappings as simultaneous c
+is much more promising than trying to guess what one character means and the
+remaining characters to fit.
+Third: We can make this falsifiable.
+Rather than simply looking for patterns that support our preferred interpretation
+can create an algorithm that measures how surprising a match actually is compa
+random controls.
+That would make even an unsuccessful experiment valuable.
+One decision I'd like to make before we start coding
+I think there are two reasonable ways to approach the initial experiment.
+Which approach should we take first?
+Investigate
+both
+possibilities
+Build the sequential and non-sequential models simultan
+avoids assuming that Caractors represents continuous te
+Assume it's a
+continuous
+passage
+Start with your original relative-distance and cross-va
+This is the more ambitious decipherment experiment.
+Assume it's a
+character collection
+First investigate character frequencies, symbol rela
+and potential writing-system structure.
+What should we prioritize in the initial research?
+Historical provenance and reconstructing the original transcription
+Linguistic research and identifying plausible writing systems
+Designing the statistical algorithm and testing it against the English text
+My personal preference is to investigate both possibilities, starting with provena
+hate to spend weeks developing a sophisticated cryptanalysis algorithm only to
+we're trying to decipher a collection of individually selected symbols rather than
+Continue the investigation
+11/11/26, 2:06 AM Caractors Decipherment Approach
+https://chatgpt.com/share/6af42fe6-83e8-83e8-b4e4-5ec0879c9720 19/52
+of text.
+11/11/26, 2:06 AM Caractors Decipherment Approach
+https://chatgpt.com/share/6af42fe6-83e8-83e8-b4e4-5ec0879c9720 20/52
+You said:
+11/11/26, 2:06 AM Caractors Decipherment Approach
+https://chatgpt.com/share/6af42fe6-83e8-83e8-b4e4-5ec0879c9720 21/52
+We need to determine whether the Caractors docume
+of the original writing system, a transcription of the w
+or an attempt to represent the characters using some
+imperfect recollection.
+I agree with this, I forgot to mention it. For example, t
+document called the LDS Egyptian Alphabet that peop
+was an attempt to explain certain characters of the pla
+meanings, however I think that's completely incorrect
+an unfinished attempt to make up a brand new crypto
+system for communication.
+If you have historical information to help answer this q
+please let me know.
+Based on my looking at the caractors document, I thin
+make a guestimate.
+Since scholars claim it's John Whitmer's handwriting, a
+one of the 8 witnesses, we know for sure he saw the p
+addition, the 3 witness experience was very different f
+which actually helps our case. The 3 had a visionary ex
+(angel, etc). The 8 had a standard worldly scientific ex
+each got to take turns handling the plates. It wouldn't
+at all that one of them asked to write down some of it
+historical claim is that this was actually characters from
+and the handwriting has been analyzed to be someon
+legitimate opportunity to copy them, it seems comple
+realm of possibility the claim is true. The date of the 8
+July 2 1829 (which matches your June 1829 hypothesi
+I'm curious if they determined the symbols themselve
+Whitmer's handwriting, or just the heading "Caractors
+hardwriting analysis would be difficult on unknown sy
+not impossible.
+I wonder if it could be some type of 'frottage' as a rud
+carbon copy system from that time period, however v
+characters seem very crisp and at most seem to have
+feathering or drag stroke (to my completely untrained
+It'd be humanly impossible to do this number of symb
+memory. Because the symbols are very different from
+language, it'd be impossible to draw from any type of
+description (similar to how joseph dictated the english
+scribes). If he were simply copying down a few examp
+it seems strange that he would have so many obvious
+There are several symbols that look extremely similar
+free-hand re-drawing the symbols (and using an inacc
+it's likely the similar symbols were actually identical on
+(or near-identical since the engravers may not have ha
+and may have had their own handwriting cause minor
+changes to the same semantic symbol).
+If he were just taking down some example characters,
+he'd choose to repeat the same symbol multiple time
+encountered a symbol he'd already copied he'd just s
+duplication. So, I think it is actually a full "paragraph"
+without knowing compression level we don't know if i
+11/11/26, 2:06 AM Caractors Decipherment Approach
+https://chatgpt.com/share/6af42fe6-83e8-83e8-b4e4-5ec0879c9720 22/52
+sentence, verse, chapter, etc in the english version).
+The spacing of the symbols is interesting as well. Igno
+heading 'Caractors', row 4 has a large space at the end
+where an additional symbol would easily fit (it's 1 of 2
+doesn't go to the end of the row), and the 1st symbol
+not especially large so a typical human would not mo
+next row until there was insufficient room, so my assu
+the gold plates actually had a space there. In addition
+black square (which exists in 3 other places) is slightly
+than the other starting symbols which is odd as some
+would likely start every row with an aligned column, e
+spacing slowly drifted with each character.
+If these symbols were actually copied freehand, it'd se
+Whitmer had artistic talent, because when I copy som
+english freehand my character sizing could easily mism
+I'm copying forcing me to word-wrap. He actually dra
+the identical symbols slightly differently each time, lik
+font size etc but identical strokes.
+I feel like the strange black square could be some type
+separation symbol, because it doesn't look like any of
+symbols.
+There are several symbols which look like tick marks o
+and I'd think maybe it could indicate a date because y
+frequently stated in the book of mormon, however mo
+have identical counts of ticks so that assumption may
+(although some chapters do mention the same numb
+times).
+If it were some type of frottage, the estimated dimens
+plates may be interesting to compare to this page. If i
+frottage, the dimensions of the paper are strange as it
+like a book page to me (wide and short). It would be i
+know if it's rotated to the correct orientation.
+I agree with your cramped analysis. I disagree that the
+was originally larger, although it's obviously frayed on
+there is not a single ink bleed anywhere on the edges
+and the spacing at the bottom is larger than between
+it's unlikely there was another row.
+I agree it's probably not the one taken to Anthon. It w
+any sense for it to be related to Joseph's revision of G
+became the book of Moses in the Pearl of Great Price)
+was not translated from any text, it was an inspired re
+experience similar to Doctrine & Covenants. It could t
+from the Book of Abraham, but then the writing style
+much more similar to Egyptian (like the hypocephalus
+Although it's smart to orient our search by doing this
+guestimate, in the end, if we find a probable match to
+text, then the guessed history no longer matters beca
+statistical proof, and the history is not well documente
+we're guessing on the provenance, so there's no harm
+t d t i t d t it j t f i
+11/11/26, 2:06 AM Caractors Decipherment Approach
+https://chatgpt.com/share/6af42fe6-83e8-83e8-b4e4-5ec0879c9720 23/52
+ChatGPT said:
+our gut and trying to decrypt it just as a fun experime
+the guestimates could help guide our search with heu
+a match more quickly.
+I think I heard a quote from one of the witnesses that
+what that of common tin
+If witnesses claimed approximately 6"x8" and 50 lbs th
+be able to guestimate the number of pages to get a s
+(minus probably 2/3 to account for the sealed portion
+pages).
+You make a keen observation, if we're able to find the
+passage that matches this Charactors document, and
+have the scribe manuscript for that passage (some we
+the 20-word average segment might give clues about
+translation mechanism or source text.
+The stick of joseph broadside document is extremely
+because it definitely is a close match to the 1st 3 rows
+Charactors document. I think I digitize both separately
+same algorithm on both, to see if either one finds a m
+I think your argument is stronger than the conventional assumption that John W
+simply copied a few interesting characters from memory. There are several detai
+identified that deserve to be investigated as actual physical evidence, rather than
+as speculation.
+I also found some historical information that changes how I'd frame this.
+In particular, I think we can establish a fairly strong case that the Caractors docu
+copied from a preexisting character document, but we cannot yet establish whet
+document was itself copied directly from the plates.
+Those are two different questions, and I think the second is where the most inte
+investigation lies.
+1. Your theory about the Egyptian Alphabet docume
+I think you're right to challenge the assumption that the LDS Egyptian Alphabet
+were intended to explain the Book of Mormon characters.
+The historical documents provide a pretty interesting alternative explanation.
+The Joseph Smith Papers Project has a detailed introduction to these documents
+Introduction to Egyptian Alphabet Documents, circa July–November 1835 .
+Here's what the archival research establishes.
+Their actual historical context
+In July 1835, Joseph Smith and his associates acquired Egyptian papyri.
+Following that acquisition, three people began producing separate Egyptian
+Alphabet documents:
+Joseph Smith — Egyptian Alphabet A.
+Worked for 43s
+11/11/26, 2:06 AM Caractors Decipherment Approach
+https://chatgpt.com/share/6af42fe6-83e8-83e8-b4e4-5ec0879c9720 24/52
+Oliver Cowdery — Egyptian Alphabet B.
+William W. Phelps — Egyptian Alphabet C.
+These documents weren't simply a collection of characters with definitions. They
+several columns:
+The last column is particularly interesting.
+Phelps and Cowdery initially attempted to associate the non-Roman characters w
+letters, but this column was abandoned almost immediately.
+The Joseph Smith Papers editors also identify at least five sources for the charact
+1. Egyptian hieroglyphs.
+2. Egyptian hieratic characters.
+3. Characters associated with the earlier Pure Language documents.
+4. Characters of unknown origin.
+5. Composite characters constructed from characters of unknown origin.
+Most of the characters in the later portions were taken directly from the Egyptia
+papyri. Joseph Smith… +1
+Could this have been a cryptographic system?
+I would distinguish two interpretations:
+Interpretation A: An attempt to decipher an existing ancient language.
+This is the conventional explanation for the Egyptian Alphabet project.
+Interpretation B: An attempt to construct a new language or symbolic
+communication system.
+This is closer to your theory.
+There is actually historical evidence that the early Saints were experimenting wit
+recovering the Adamic or Pure Language.
+John Whitmer copied a document called Sample of Pure Language in 1832. Willia
+subsequently expanded this work in a letter to his wife in May 1835.
+These documents contained words, sounds, definitions, and eventually character
+The Egyptian Alphabet documents incorporated material from this Pure Languag
+This means the 1835 project wasn't necessarily just an attempt to decipher Egyp
+connected to a broader effort to understand ancient language and reconstruct t
+language of humanity.
+However, I haven't found historical evidence that the specific goal was to create
+cryptographic communication system.
+Column Intended content
+Character A non-Roman character
+Sound A transliteration or pronunciation
+Explanation An explanation of the character and sound
+Letter An attempted correlation with English letters, in two versions
+11/11/26, 2:06 AM Caractors Decipherment Approach
+https://chatgpt.com/share/6af42fe6-83e8-83e8-b4e4-5ec0879c9720 25/52
+I would describe your theory more cautiously as an attempt to construct an artif
+language, potentially with cryptographic properties.
+That distinction matters because we don't want to impose modern cryptographi
+on an experiment that may have been primarily linguistic or theological.
+My conclusion: I would completely exclude the Egyptian Alphabet documents fr
+Book of Mormon decipherment dataset. They are useful as evidence of the kinds
+experiments occurring in the early Church, but their historical relationship to the
+characters is not established.
+2. Did John Whitmer actually see the plates, and wh
+Yes, and this is one of the strongest pieces of circumstantial evidence supporting
+your hypothesis.
+The distinction between the Three Witnesses and Eight Witnesses is historically i
+The Three Witnesses
+Oliver Cowdery, David Whitmer, and Martin Harris testified that they saw the pla
+visionary experience involving an angel and a heavenly voice.
+The Eight Witnesses
+The Eight Witnesses had a different experience.
+Their testimony states:
+They specifically describe seeing and handling the physical plates.
+This is not the same kind of testimony as the Three Witnesses.
+The original testimony is preserved in the Joseph Smith Papers:
+Testimony of Eight Witnesses, late June 1829 .
+The eight included John Whitmer.
+What about the date?
+One small correction: the Joseph Smith Papers dates the testimony to late June 1
+than July 2 specifically.
+David Whitmer later recalled that the Eight Witnesses saw the plates the day afte
+Witnesses. Lucy Mack Smith recalled that it happened a few days later.
+The precise date isn't established.
+Nevertheless, late June or early July 1829 is consistent with the proposed timefra
+Caractors document. BYU Studies +1
+Did John Whitmer have an opportunity to copy the characters?
+Absolutely.
+There is no historical impossibility here.
+Joseph Smith, Jr. ... has shown unto us the plates ... which we did handle with o
+we also saw the engravings thereon.
+11/11/26, 2:06 AM Caractors Decipherment Approach
+https://chatgpt.com/share/6af42fe6-83e8-83e8-b4e4-5ec0879c9720 26/52
+In fact, the Eight Witnesses' testimony explicitly says they saw the engravings on
+And John Whitmer subsequently became a scribe for Joseph Smith during the tr
+However, there's an important qualification: the testimony doesn't say that the E
+were allowed to independently inspect every leaf, study the inscriptions at lengt
+make copies.
+It says they handled the plates and saw the engravings.
+We have no surviving contemporary account saying that John requested permiss
+copy characters.
+But we also have no evidence that he couldn't have done so.
+I would consider this a plausible historical scenario, not an established event.
+3. Did handwriting analysis establish that the
+symbols themselves are John Whitmer's handwriting
+This is probably the most important technical question you've asked.
+And the answer is: Yes, the researchers specifically investigated the characters,
+the heading.
+But they used two different methods, and it's important to understand what eac
+Method 1: Handwriting characteristics
+The researchers first compared the word "Caractors" with known samples of Joh
+Whitmer's handwriting.
+They examined characteristics such as:
+Consistency of writing slope.
+Pen pressure.
+Quill control.
+Baseline alignment.
+Stroke characteristics.
+Individual letter construction.
+One especially distinctive feature was Whitmer's use of shading.
+He applied substantial pressure on downward strokes while using very light pres
+upward strokes.
+This created a recognizable difference in ink thickness.
+The researchers compared these characteristics against known examples of
+Whitmer's handwriting.
+They concluded that the heading was written by John Whitmer.
+Then they investigated whether the characters below it were also written by him
+They explicitly state:
+Although it is impossible to determine with absolute certainty, it appears that
+below the title were also written by John Whitmer.
+11/11/26, 2:06 AM Caractors Decipherment Approach
+https://chatgpt.com/share/6af42fe6-83e8-83e8-b4e4-5ec0879c9720 27/52
+That's an important qualification.
+They weren't claiming to identify the semantic identity of unknown symbols. The
+examining the physical manner in which the symbols were written.
+For example, a character doesn't need to be an English letter for us to investigat
+How the quill enters the paper.
+Whether the writer changes pressure during the stroke.
+Whether the pen is lifted between strokes.
+Whether the writer maintains a consistent slant.
+Whether strokes have similar curvature and termination characteristics.
+These are handwriting characteristics independent of the meaning of the symbo
+Method 2: X-ray fluorescence
+This is even more interesting.
+In September 2012, the researchers conducted X-ray fluorescence testing on the
+They compared the ink in the title with the ink used in the characters.
+The ink compositions were atomically consistent.
+This supports the conclusion that the title and characters were written during the
+and probably by the same person.
+It doesn't independently prove the identity of the writer, but it strengthens the h
+attribution. ensignpeakfo… +1
+My interpretation: I think we can reasonably treat John Whitmer as the likely co
+characters themselves, not merely the heading.
+And that is a significant finding.
+It means we're probably looking at a document physically produced by someone
+personally handled the plates.
+It doesn't prove he copied directly from the plates, but it makes that possibility
+historically plausible.
+11/11/26, 2:06 AM Caractors Decipherment Approach
+https://chatgpt.com/share/6af42fe6-83e8-83e8-b4e4-5ec0879c9720 28/52
+4. Your frottage theory
+I like that you're considering the possibility of a physical transfer rather than assu
+characters were redrawn.
+Frottage, or rubbing, involves placing paper over a surface and applying a writin
+medium to reveal the raised or recessed features beneath it.
+There are several potential mechanisms we could consider:
+I don't know of any historical account documenting a rubbing or transfer techniq
+with the Book of Mormon plates.
+And there are some practical problems.
+The plates were described as engraved metal leaves. A direct rubbing would req
+to conform closely to the engraved surface. If the engravings were recessed, the
+image would depend heavily on the transfer medium and pressure.
+A direct rubbing would also tend to preserve the dimensions and spacing of the
+original inscription.
+What does the Caractors document suggest?
+I agree with your observation that the symbols look relatively crisp.
+However, I wouldn't consider crispness sufficient evidence of tracing or rubbing.
+A skilled penman can produce remarkably consistent symbols with a quill.
+The X-ray fluorescence results establish that the symbols were written with ink c
+consistent with the title. That is consistent with ordinary writing, although it does
+conclusively rule out a transfer process.
+One useful experiment would be to examine the high-resolution original and loo
+Ink accumulation at stroke beginnings and endings.
+Variation in pressure within individual strokes.
+Quill splits and parallel lines.
+Ink pooling at intersections.
+Stroke overlaps.
+Evidence of pen lifts.
+Repeated micro-imperfections in supposedly identical characters.
+The most useful observation might be whether identical characters share the sam
+microscopic irregularities.
+If they do, that could suggest a mechanical reproduction or tracing process.
+If they have similar overall shapes but different stroke-level characteristics, that w
+independent freehand reproduction.
+Method How it would work
+Direct rubbing Paper placed against engraved surface; graphite or another medium r
+Ink transfer Ink applied to a surface and transferred to paper
+Tracing Paper placed over an image or impression and characters traced
+Freehand copying Characters visually reproduced using another document as reference
+11/11/26, 2:06 AM Caractors Decipherment Approach
+https://chatgpt.com/share/6af42fe6-83e8-83e8-b4e4-5ec0879c9720 29/52
+We could even quantify this using image registration and computer vision.
+I wouldn't rule out frottage, but I'd rank freehand copying from another docume
+leading explanation given the historical evidence currently available.
+5. I think your argument about repeated
+characters is particularly interesting
+You make a good point:
+If someone were merely selecting representative characters, why would they inte
+the same character multiple times?
+There are several possible explanations:
+1. They were copying a continuous passage.
+2. They were copying a section of a larger document that contained repeated
+3. They were documenting the complete set of characters in a particular samp
+trying to eliminate duplicates.
+4. They were copying an existing transcription that already contained repetitio
+I agree that option 1 deserves serious consideration.
+However, I would challenge one assumption: someone creating a character refer
+might intentionally include duplicates if they were trying to show contextual vari
+different combinations.
+For example, if two visually similar characters had slightly different meanings, rep
+could be important.
+But I think there's a stronger observation in your argument.
+If the document was copied from another transcription, then the repeated cha
+necessarily tell us anything about John Whitmer's selection preferences.
+He might simply have been reproducing everything that appeared in the source
+That means we shouldn't use his presumed intentions as a major constraint in th
+decipherment algorithm.
+We should treat the sequence as potentially continuous until we have evidence o
+I would assign a meaningful initial probability to that hypothesis.
+6. The spacing observations and the black squares
+I want to address these individually because they could be useful when digitizing
+the document.
+The empty space at the end of row four
+I agree that this deserves investigation.
+If the row were being copied from a continuous source, there are at least two po
+The original inscription contained a meaningful space.
+Whitmer preserved a spacing or line-break convention from the source.
+11/11/26, 2:06 AM Caractors Decipherment Approach
+https://chatgpt.com/share/6af42fe6-83e8-83e8-b4e4-5ec0879c9720 30/52
+The fact that the next symbol is relatively small makes the decision to start a new
+more interesting.
+I wouldn't immediately assume he ran out of room.
+There could be a structural reason for the gap.
+The offset black square at the beginning of row seven
+This is another interesting detail.
+You suggest it might be a separator.
+I would consider at least four possibilities:
+1. A punctuation or paragraph marker.
+2. A special symbol with a different semantic function.
+3. A formatting mark indicating a section boundary.
+4. A character that was originally part of the source's preceding or following se
+Its recurrence in three other places is important.
+If the square is genuinely a distinct symbol, we should investigate whether its pla
+correlates with:
+Line beginnings.
+Line endings.
+Large gaps.
+Changes in character density.
+Repeated sequences.
+I would not automatically classify it as a separator just because it looks different.
+It could be a logogram, grammatical marker, or even a symbol representing a co
+The tick marks
+I also wouldn't immediately interpret these as numbers.
+There are several possible explanations:
+Numerals.
+Repeated consonants or syllables.
+Diacritical marks.
+Tally-like symbols.
+A standardized grammatical marker.
+A character that simply happens to resemble a series of strokes.
+One particularly useful test would be to determine whether the number of stroke
+varies systematically.
+If the same symbol always contains five strokes, for example, it might be a single
+character rather than a numeral.
+If the number of strokes varies, it might represent a numeric system or a phonet
+We should digitize each instance separately rather than collapsing them into one
+symbol prematurely.
+11/11/26, 2:06 AM Caractors Decipherment Approach
+https://chatgpt.com/share/6af42fe6-83e8-83e8-b4e4-5ec0879c9720 31/52
+7. The original paper and your
+disagreement about the missing rows
+I think there's an important distinction here, and I want to clarify something from
+earlier explanation.
+The researchers discovered an 1886 photograph taken by Jacob T. Hicks.
+That photograph shows the Caractors paper in its original context, before it was
+from the larger sheet.
+The larger sheet contained another title:
+"The Book of Generation Adam"
+This was associated with John Whitmer's copy of Joseph Smith's revision of Gene
+The researchers propose that Whitmer used the paper as a wrapper for that man
+Here's the important distinction:
+The surviving Caractors inscription does not necessarily represent a fragment
+inscription. It represents a section of a larger sheet of paper.
+Those are very different things.
+The researchers estimate that the surviving paper was only about one-fourth to
+size of the original sheet to which it belonged.
+But that doesn't establish that additional rows of characters were lost.
+Your argument about the bottom margin is therefore perfectly compatible with t
+The characters could have been a complete transcription on the surviving sectio
+the original sheet was much larger.
+The 1886 photograph is particularly valuable because it allows us to inspect the
+arrangement and folding.
+MacKay, Dirkmaat, and Jensen — Figure 10, 1886 glass plate photograph .
+I would actually like to use that photograph instead of the modern fragment wh
+the document, because it gives us more historical context.
+8. The Stick of Joseph broadside: a
+potentially critical second dataset
+I agree completely with your idea of digitizing this separately.
+The 1844 Stick of Joseph broadside is fascinating because its three lines of charac
+resemble the first three lines of Caractors.
+But there's an important historical discovery here.
+The Joseph Smith Papers researchers specifically investigated the relationship be
+two documents.
+They concluded that the broadside could not have been copied directly from Joh
+surviving Caractors document.
+11/11/26, 2:06 AM Caractors Decipherment Approach
+https://chatgpt.com/share/6af42fe6-83e8-83e8-b4e4-5ec0879c9720 32/52
+Why?
+John Whitmer had left the Church in 1838, taking his papers with him.
+The broadside was published in December 1844.
+Therefore, the editors of the broadside must have obtained the characters from
+another source.
+This is strong evidence that multiple copies of the characters circulated independ
+The broadside itself advertises the characters as:
+It also describes them as the same characters shown to Professor Anthon by Ma
+That claim isn't independently verified, but it's historically interesting. Joseph Smith
+How I'd use these two documents
+I'd digitize them independently, but I'd also perform a third experiment:
+Align the two documents and determine whether the characters are identical a
+individual stroke level.
+There are several possibilities:
+We should also compare the character order.
+If the first three lines match in sequence, including minor variations, that's strong
+shared ancestor document.
+We might be able to reconstruct a family tree of the historical transcriptions.
+Hypothetical document genealogy
+Original plate inscription
+A correct copy of the characters taken from the plates of the Book of Mormon
+Result Interpretation
+Nearly pixel-identical symbols Possible reproduction from a common engraving, tracin
+mechanically transferred copy
+Same shapes, different
+stroke details
+Independent hand copying from a common source
+Different shapes, same
+overall sequence
+Different transcriptions or copying errors
+Different spacing but
+same sequence
+Likely transcription from a common source with altered
+11/11/26, 2:06 AM Caractors Decipherment Approach
+https://chatgpt.com/share/6af42fe6-83e8-83e8-b4e4-5ec0879c9720 33/52
+Early transcription
+Unknown copyist / date
+Whitmer copy
+c. 1829–1831
+Other copies
+Unknown dates
+Stick of Joseph
+1844 broadside
+Illustrative hypothesis, not an established genealogy. The broadside and Whitmer copy m
+from a common earlier transcription.
+This could be more useful than we initially realized.
+If we find that the two documents contain the same sequence of characters but
+copying errors, we can potentially reconstruct some of the characteristics of thei
+common source.
+That would give us a much better dataset for decipherment.
+9. Estimating the number of plates and their surface
+I found a particularly relevant scholarly study:
+Bruce E. Dale, "How Big A Book? Estimating the Total Surface Area of the Book
+Mormon Plates."
+Read the full paper — Interpreter, 2017 .
+The paper estimates the total inscribed surface area at approximately 30–86 squ
+two independent estimation methods. BYU ScholarsArc…
+Let's see what that means using the dimensions you mentioned.
+Estimated physical dimensions
+Plate width
+6–7"
+Plate height
+8"
+Total weight
+40–60 lb
+Stack thickness
+4–6"
+Approximate historical witness descriptions, not physical measurements of surviving plate
+One thing to be careful about: the 40–60 pound estimate and the thickness desc
+independently establish the number of leaves. We would need to make assumpt
+metal composition and individual leaf thickness.
+But we can estimate the number of leaves from surface area.
+If each plate is approximately 6 × 8 inches, and both sides are inscribed:
+6 × 8 × 2 = 96 in2
+11/11/26, 2:06 AM Caractors Decipherment Approach
+https://chatgpt.com/share/6af42fe6-83e8-83e8-b4e4-5ec0879c9720 34/52
+That's approximately 0.667 square feet per plate.
+Using Dale's estimated surface area:
+Estimated range
+45
+Plates at 30 sq ft
+129
+Plates at 86 sq ft
+These are approximate mathematical equivalents, not a new independent estima
+historical plate count.
+Accounting for the sealed portion and lost pages
+Your suggestion to subtract approximately two-thirds is a useful scenario to test
+treat that percentage as historically established.
+The Book of Mormon describes a substantial sealed portion, and the lost 116 ma
+represent a separate textual loss. We don't know the physical extent of either rel
+entire plate collection.
+I'd model several scenarios:
+The middle scenario gives us approximately 19 square feet.
+That would represent approximately 29 plates of 6 × 8 inches, both sides inscrib
+However, this is only an illustrative scenario. The lost manuscript pages don't ne
+correspond to an equivalent fraction of the physical plates.
+What this means for our decipherment
+I think we should use the 30–86 square-foot range as a broad constraint rather t
+establish an exact number of symbols.
+We could calculate several candidate symbol densities:
+Symbols per square inch.
+Symbols per plate.
+Symbols per line.
+English words per plate.
+English words per square inch.
+Then compare those against the actual Caractors document.
+This would be useful when deciding whether the writing system is more likely alp
+syllabic, logographic, or mixed.
+N = 0.667
+30 to 86
+Inscribed surface area Hypothetical survivin
+30 sq ft
+58 sq ft
+86 sq ft
+11/11/26, 2:06 AM Caractors Decipherment Approach
+https://chatgpt.com/share/6af42fe6-83e8-83e8-b4e4-5ec0879c9720 35/52
+10. Where I think we stand
+I want to summarize what I consider our strongest working hypotheses.
+There is one thing I particularly want to emphasize.
+The scholarly paper itself concludes that the Caractors document likely containe
+characters, despite the uncertainty about its precise provenance. The researchers
+distinguish it from the later Pure Language experiments. ensignpeakfo… +1
+I think that gives us a reasonable historical foundation for treating it as a potent
+transcription of the plate characters, without assuming that the surviving docum
+copy from the plates.
+My recommendation for the next experiment
+I would now move toward digitization.
+I'd create three datasets:
+1. Caractors: Digitize every symbol, preserve its original coordinates, and assig
+identifier to every occurrence.
+2. Stick of Joseph: Independently digitize its three lines, without assuming the
+to Caractors.
+3. Book of Mormon: Obtain the 1830 edition in machine-readable form, prese
+and verse boundaries.
+Then I'd perform an initial experiment that doesn't require knowing what any ch
+Determine whether the two character documents have identical sequences.
+Identify recurring symbols and their frequencies.
+Identify recurring sequences of two, three, and four symbols.
+Determine whether the black square has a consistent structural role.
+Compare the character sequence against English phrase frequencies.
+Run randomized controls.
+One thing I'd specifically avoid: manually deciding that a particular symbol mea
+before the first statistical experiment. We should let the data generate candidate
+then test them independently.
+Hypothesis My assessment
+John Whitmer wrote the heading Strong evidence
+John Whitmer wrote the characters Probable
+The characters were copied from another document Strong evidence
+The source document contained characters attributed to the plates Supported by his
+John Whitmer personally copied directly from the plates Plausible, unprov
+Caractors is a continuous passage Plausible, worth t
+The black square is a separator Interesting hypot
+The characters were mechanically transferred Unproven
+The Stick of Joseph shares a common source with Caractors Very likely
+Egyptian Alphabet explains the Caractors symbols No established ev
+11/11/26, 2:06 AM Caractors Decipherment Approach
+https://chatgpt.com/share/6af42fe6-83e8-83e8-b4e4-5ec0879c9720 36/52
+You said:
+ChatGPT said:
+I think there's enough here to make this a worthwhile computational research pr
+even if we never decipher the text, reconstructing the relationships between the
+character transcriptions would be a meaningful result in its own right.
+I've looked at the broadside image and the Oliver Cow
+Frederick Williams.
+All have value, but I think Whitmer Charactors is the m
+Broadside is almost identical to 3 rows of Whitmer ho
+handwriting is different, so they were either drawn by
+people, or one was an actual frottage. Also, there are
+symbols in each row that don't match, showing that th
+likely mistakes during the copying. Both have symbols
+missing, so analyzing them separately and together co
+interesting. Broadside is shorter, so it's less likely to fin
+new that Whitmer didn't find, however one of the tick
+symbols has a more interesting pattern that makes it
+to decipher if it's actually a number system. In genera
+broadside has more artistic symbols so it gives the im
+being a more faithful rendition.
+Most importantly broadside is an obvious advertising
+and it states very clearly these are actual characters ta
+from the plates - so I think there's strong reason to be
+an actual passage. We have to hope that passage is in
+english text and wasn't part of the lost pages from the
+that was never re-translated or published.
+The Cowdery & Williams are larger documents with a
+& hebrew translations with only a couple symbols. Th
+identical to each other in some parts but different in o
+much longer. The few symbols that exist are the same
+there's not any extra value from one compared to the
+however those symbols are actually labeled with their
+it'd be the perfect rosetta stone, except that they are s
+don't match anything in the broadside or Whitmer do
+However, it can definitely give us a clue as to the writi
+compression size.
+One has two symbols and is labeled 'The book of mor
+The other has two almost identical symbols and is lab
+interpreter of languages'
+I haven't done a corpus search, but from memory I do
+'interpreter of languages' exists in the english text, bu
+definitely does and 'urim and thummim' might. I think
+mormon' only exists a title, but the titles likely were ac
+engraved as translateable text and not added by the p
+afterwards.
+I think your assessment gives us a much better way to prioritize the historical do
+actually change the research strategy based on what you've observed.
+Worked for 39s
+11/11/26, 2:06 AM Caractors Decipherment Approach
+https://chatgpt.com/share/6af42fe6-83e8-83e8-b4e4-5ec0879c9720 37/52
+I'd make the Whitmer Caractors document our primary dataset, the Stick of Jo
+broadside our secondary dataset, and the Cowdery/Williams documents our l
+calibration dataset.
+That distinction is important.
+The first two potentially preserve the same underlying plate inscription. The latte
+tell us something about how early Church members conceptualized symbolic wr
+don't necessarily preserve the same writing system.
+I particularly like your observation about the differences between the broadside
+copy. Rather than treating those differences as noise, we can use them to investi
+history of the transcription itself.
+There are three separate questions now:
+1. Are Whitmer and the broadside independent copies of a common source?
+2. Can the symbols in either document be matched to the English Book of Mo
+3. Can the Cowdery/Williams documents provide clues about the structure and
+of the underlying writing system?
+I'd also add a fourth: could the title and headings themselves be part of the orig
+rather than editorial additions?
+Let's examine that.
+1. An important discovery about the broadside's provenance
+I found something in the Joseph Smith Papers research that supports part of you
+but also introduces an important limitation.
+The December 14, 1844 issue of The Prophet advertised the broadside as a speci
+characters copied from the plates.
+The wording was:
+The broadside itself says it is a correct copy of characters taken from the plates.
+I agree that this is meaningful historical evidence. It's a contemporary publicatio
+modern reconstruction.
+But there's a distinction worth preserving:
+The publishers represented the characters as originating from the plates.
+They don't identify the person who made the original transcription.
+They don't establish that the engraver copied directly from the plates.
+We don't know whether the publishers independently verified the provenan
+The Joseph Smith Papers editors make a similar distinction: these documents cla
+copies of characters Joseph transcribed from the plates, but none can be verified
+specific surviving Joseph Smith document. Joseph Smith Pa…
+An important correction to our earlier discussion
+I also found something that changes my assessment of John Whitmer's opportu
+directly from the plates.
+The Joseph Smith Papers introduction explicitly says:
+We have published a very neat specimen of the original characters or hierogly
+copied from the plates which the Book of Mormon was translated from.
+11/11/26, 2:06 AM Caractors Decipherment Approach
+https://chatgpt.com/share/6af42fe6-83e8-83e8-b4e4-5ec0879c9720 38/52
+It then concludes that any characters copied from the plates must have originate
+document created by Joseph Smith.
+This is a stronger historical qualification than I gave you previously.
+John Whitmer's status as an Eight Witness establishes that he testified to seeing
+the plates. It does not establish that he copied their inscriptions.
+The more likely historical pathway, according to the editors, is:
+Joseph Smith transcribed characters → another person copied Joseph's transc
+surviving Caractors document.
+That doesn't make the characters inauthentic. It simply means we should disting
+authentic transcription of the plate writing from a direct physical copy made by W
+Interestingly, the Joseph Smith Papers also discusses Joseph Knight's recollection
+helped Joseph draw characters. The editors suggest this could have involved rep
+improving an existing transcription, possibly even a rubbing. Joseph Smith Pa…
+This makes your interest in mechanical transfer methods particularly relevant, alt
+don't yet have evidence that the surviving Whitmer document was produced tha
+2. The Cowdery and Williams documents
+are more interesting than I initially realized
+I looked at the actual archival transcriptions, and there is an important detail abo
+you remembered.
+The Cowdery document contains:
+First section: English and purported Hebrew
+English
+"For it grieveth me that I should lose this tree & the fruit thereof"
+Hebrew
+"fin Zemim ezmon E. Zer Oms. ifs veris exzer ens. vonis vinesis"
+Second section: English and purported Hebrew
+English
+"Brethren I bid you adieu"
+Hebrew
+"ifs E. Zamtri"
+Third section: characters and English labels
+There is no evidence that any of these witnesses saw or handled the plates exc
+occasion described in their statements, and none ever claimed to have copied
+from the plates.
+Label Associated characters
+11/11/26, 2:06 AM Caractors Decipherment Approach
+https://chatgpt.com/share/6af42fe6-83e8-83e8-b4e4-5ec0879c9720 39/52
+Source: Joseph Smith Papers — Oliver Cowdery document . Joseph Smith Pa…
+There are two important discoveries here.
+The English phrases have exact Book of Mormon matches
+The first is Jacob 5:13:
+The second is Jacob 7:27:
+The second is particularly interesting because Cowdery's document uses "Brethr
+adieu," which is a slight variation of the verse.
+The 1830 edition contains these passages as well. Wikisource, t… +1
+So the document contains two actual Book of Mormon passages, accompanied
+Hebrew translations.
+This is useful because it establishes that Cowdery was using the Book of Mormo
+material for at least part of his language exercise.
+The Hebrew isn't actually recognizable Hebrew
+The Joseph Smith Papers editors explicitly state that the phrases labeled Hebrew
+the Roman alphabet, but the transliteration is not recognizable as Hebrew. Jose
+This is important for our purposes.
+I wouldn't use those two phrases to estimate the compression ratio of the plate
+They are better evidence of an early attempt at linguistic experimentation.
+However, the final section is different.
+The two pairs of unknown characters are associated with English labels, and the
+Papers editors identify these as the only known surviving documents that presen
+from the gold plates alongside English translations.
+That makes them potentially valuable.
+But we need to be careful: the labels are not independently verified translations.
+descriptions, headings, or semantic associations rather than literal translations o
+3. Your observation about "The Book of
+Mormon" and "the interpreters of languages"
+I think this is where we should do a little more investigation before assigning me
+those four characters.
+Your memory is correct: the phrase "the interpreters of languages" is not a stand
+the Book of Mormon text.
+The Book of Mormon Two characters
+The interpreters of languages Two characters
+For it grieveth me that I should lose this tree and the fruit thereof.
+Brethren, adieu.
+11/11/26, 2:06 AM Caractors Decipherment Approach
+https://chatgpt.com/share/6af42fe6-83e8-83e8-b4e4-5ec0879c9720 40/52
+However, the Book of Mormon does discuss the interpreters, and the Doctrine a
+uses the term "interpreters" in connection with translation.
+The distinction between these possibilities matters:
+The characters might represent the words "Book of Mormon."
+They might represent a title or label identifying a particular record.
+The characters might represent "interpreters" and "languages" separately.
+They might be a compound expression representing an object or concept.
+Likewise, "The Book of Mormon" is an English title, not necessarily a phrase that
+underlying narrative.
+There is a historical reason to take that possibility seriously: the Book of Mormon
+says it was taken from the last leaf of the plates. That suggests the title page was
+the translated record, rather than simply being a modern publisher's invention.
+But we shouldn't assume that the two Cowdery characters correspond to the ent
+English title.
+A potentially useful compression experiment
+Let's temporarily assume the labels are genuine translations.
+We have two character pairs:
+If each pair represents a phrase, then we have four characters corresponding to
+That suggests several possible writing-system structures:
+Model A: One character per significant word
+Character 1 = Book
+Character 2 = Mormon
+Character 3 = Interpreter
+Character 4 = Languages
+Articles and prepositions are implicit.
+Model B: Compound logograms
+Each pair represents a compound expression, with each character contributing a
+semantic component.
+Model C: Syllabic representation
+The four characters encode syllables, with the English labels representing the co
+translated meaning.
+Model D: A mixed system
+Some characters represent words, others sounds or grammatical elements.
+I would not use this as a definitive compression ratio, but it provides a useful set
+candidate models.
+Characters English association
+Pair A The Book of Mormon
+Pair B The interpreters of languages
+11/11/26, 2:06 AM Caractors Decipherment Approach
+https://chatgpt.com/share/6af42fe6-83e8-83e8-b4e4-5ec0879c9720 41/52
+The important thing is that we now have a small collection of potentially translat
+even though they don't overlap with the Whitmer or broadside documents.
+I would preserve them in our research database as a separate dataset, with a con
+attached to each proposed translation.
+4. One discovery about the relationship between Cowdery and
+The Joseph Smith Papers editors noticed something interesting.
+Williams's copy includes both sections of Cowdery's document, but separates th
+he copied them from two different documents.
+The majority of the content is identical, suggesting either:
+Williams copied Cowdery's document.
+Cowdery copied Williams's document.
+Both copied from a shared source.
+The editors consider Cowdery's document likely earlier, particularly because of it
+connection to the 1835 language-study activities.
+The handwriting and provenance also differ: Cowdery's surviving sheet is attribu
+hand, while Williams's is attributed to Williams. Joseph Smith… +1
+This means I agree with your decision not to treat them as two independent sou
+translation evidence.
+They are essentially one historical dataset with two copies.
+But the fact that two people independently preserved the same associations is st
+It increases our confidence that these associations were deliberately recorded ra
+being accidental annotations.
+The two other English phrases are also useful
+I found a BYU Studies discussion of the Williams document that identifies the ex
+Jacob 5:13.
+Jacob 7:27.
+This is interesting because it suggests the document was being used as a langua
+exercise, not simply as a translation dictionary for the Book of Mormon characte
+It also fits the broader historical context of the Kirtland School of the Prophets a
+in Hebrew study. BYU Studies +1
+5. The broadside's artistic differences
+may have a straightforward explanation
+There's one detail I'd like to add to your observations.
+The broadside wasn't simply a person copying the characters onto another piece
+It was a commercial printing project.
+The Joseph Smith Papers describes the broadside as a gold-leaf printed sheet on
+paper, with ornamental borders and three sets of characters enclosed in separat
+11/11/26, 2:06 AM Caractors Decipherment Approach
+https://chatgpt.com/share/6af42fe6-83e8-83e8-b4e4-5ec0879c9720 42/52
+The 1844 newspaper advertisement also specifically mentions the trouble taken
+characters engraved. Joseph Smith… +1
+This introduces another possible source of errors:
+The person who engraved the broadside may have been interpreting a handw
+transcription rather than reproducing the original characters mechanically.
+That could explain why:
+Some characters are missing.
+Some strokes are simplified.
+Some characters look more artistic.
+Certain proportions differ from Whitmer's versions.
+In other words, the broadside could be a less accurate reproduction of a more a
+handwritten transcription, even if it looks more aesthetically sophisticated.
+I would actually avoid assigning higher transcription fidelity based on artistic qu
+However, the broadside could preserve details that Whitmer's copyist or an earli
+transcriptionist rendered differently.
+That makes comparing them valuable in both directions.
+6. How I'd combine the documents computationally
+I would make one important architectural decision: never merge the transcriptio
+single supposedly authoritative character sequence.
+Instead, preserve each document as an independent witness to the underlying in
+I'd use something like this:
+Primary dataset: Whitmer
+Highest priority
+Complete character sequence.
+Individual character coordinates.
+Repeated-character statistics.
+Original line breaks and spacing.
+Candidate character identities.
+Secondary dataset: Stick of Joseph
+Independent comparison
+Three-line character sequence.
+Separate character inventory.
+Identify omissions, additions, and altered strokes.
+Compare against corresponding Whitmer sections.
+Calibration dataset: Cowdery / Williams
+Separate writing system evidence
+Four unknown characters.
+Two associated English expressions.
+11/11/26, 2:06 AM Caractors Decipherment Approach
+https://chatgpt.com/share/6af42fe6-83e8-83e8-b4e4-5ec0879c9720 43/52
+Possible word/phrase compression models.
+No assumption that these characters match Whitmer.
+The most important computational experiment
+I'd align the first three Whitmer rows with the broadside and calculate:
+1. Exact matching characters.
+2. Characters with similar shapes but different strokes.
+3. Characters appearing in only one document.
+4. Differences in ordering.
+5. Differences in spacing.
+6. Differences in character proportions.
+Then I'd build a probabilistic character correspondence table.
+For example:
+These are illustrative IDs, not actual transcriptions.
+We could then run the decipherment algorithm three ways:
+Whitmer alone.
+Broadside alone.
+Combined, using the most likely correspondence between symbols.
+This gives us a way to determine whether the additional broadside information a
+improves the search.
+It also prevents us from accidentally treating a copying error as an original chara
+7. My updated working hypothesis
+Based on everything we've discussed, this is where I'd currently place my bets.
+1. Joseph Smith created at least one transcription of characters associated with
+2. Multiple copies of that transcription, or related transcriptions, circulated am
+Church members.
+3. John Whitmer probably copied one of these documents.
+4. The broadside probably descended from another copy or transcription in th
+historical family.
+5. The first three lines of Whitmer and the broadside probably preserve substa
+same underlying sequence.
+6. The original sequence may represent a continuous passage.
+7. The Cowdery/Williams characters are potentially useful for understanding e
+and linguistic experimentation, but shouldn't be presumed to belong to the
+character inventory.
+Whitmer symbol Broadside equivalent Confid
+W001 B001 High
+W002 B002 Mediu
+W003 Missing Unkno
+W004 B004 High
+11/11/26, 2:06 AM Caractors Decipherment Approach
+https://chatgpt.com/share/6af42fe6-83e8-83e8-b4e4-5ec0879c9720 44/52
+You said:
+ChatGPT said:
+The biggest unresolved question is whether the original transcription was made
+directly from the plates, from the characters displayed during translation, or from
+intermediate representation.
+The Joseph Smith Papers research gives us a plausible historical path without co
+resolving that question.
+8. One thing I want to investigate before we start deciphering
+I'd like to investigate the possibility that the original transcription contained a tit
+This could be important for two reasons.
+First, the Book of Mormon title page reportedly came from the last leaf of the pl
+transcription contains the title, we might have a much easier starting point than
+a common narrative phrase.
+Second, the two Cowdery/Williams character pairs associated with "The Book of
+"the interpreters of languages" might provide clues about how titles, labels, and
+expressions were represented.
+I would particularly like to establish whether any historical accounts describe Jos
+copying the title page or characters from the last leaf separately.
+That could give us another candidate passage to test.
+My recommendation is that our first actual coding milestone should be a faith
+occurrence-by-occurrence digitization of Whitmer and the broadside, not a de
+algorithm yet. Once we have that, we can experiment with your statistical appro
+repeatedly changing the underlying data.
+And I think we should preserve your original intuition: treat Whitmer as a potent
+continuous passage, rather than assuming it's an alphabet or collection of exam
+enough circumstantial evidence to justify testing that hypothesis seriously, even
+historically proven.
+I looked at the egyptian alphabet document and I did
+strong resemblance to the Charactors document, from
+perspective it looks like a completely different writing
+However, the 'book of mormon' and 'interpreters' sym
+strong resemblance in style to the charactors docume
+were a close enough match for me to think they were
+word.
+That's a useful distinction, and I think it suggests we should separate two things
+been treating somewhat interchangeably:
+1. The Egyptian Alphabet's general character inventory, much of which appe
+from Egyptian papyri and other language experiments.
+2. The two pairs of characters labeled "The Book of Mormon" and "The inter
+languages" in the Cowdery/Williams documents.
+I agree that the second group deserves more attention than the first.
+Worked for 17s
+11/11/26, 2:06 AM Caractors Decipherment Approach
+https://chatgpt.com/share/6af42fe6-83e8-83e8-b4e4-5ec0879c9720 45/52
+However, I found a scholarly article that adds an interesting wrinkle to your obse
+1. The Egyptian Alphabet might actually
+contain some Book of Mormon characters
+Michael Hubbard MacKay published an article in Dialogue titled:
+The Secular Binary of Joseph Smith's Translations .
+He argues that the Kirtland Egyptian Alphabet documents aren't entirely Egyptia
+papyri characters.
+His proposed reconstruction is that the alphabet project incorporated several dif
+Characters associated with the gold plates.
+Characters from the Pure Language experiments.
+Characters from William W. Phelps's 1835 letter.
+Characters copied from the Egyptian papyri.
+He specifically identifies some characters in the earlier portions of the Egyptian A
+matching characters from the Book of Mormon transcription tradition. He also a
+later portions transition to actual papyri characters. Dialogue Jou… +1
+This is interesting because it means your impression that the Egyptian Alphabet
+different writing system could still be correct overall.
+It might actually be a compilation of different writing systems.
+I would not treat MacKay's proposed character identifications as established fact
+worth investigating.
+2. The Cowdery/Williams symbols deserve their own classificat
+Here's how I'd classify our current datasets:
+The distinction is that the Cowdery/Williams pairs have something the other doc
+explicit English associations.
+Even if those associations aren't genuine translations, they are historical evidenc
+Church members understood certain symbols.
+3. I wouldn't require identical symbols
+to establish a common writing style
+Your observation that the Cowdery/Williams symbols resemble the Caractors wri
+without being identical is potentially important.
+I'd actually introduce a new classification into our eventual digitization project:
+Dataset My proposed classification
+Whitmer Caractors Primary plate-character transcription
+Stick of Joseph Secondary plate-character transcription
+Cowdery/Williams labeled pairs Potentially translated plate characters
+Early Egyptian Alphabet characters Possible mixture of plate characters and Pure Langu
+Later Egyptian Alphabet characters Egyptian papyri characters
+Grammar and Alphabet Language experiment with multiple character sourc
+11/11/26, 2:06 AM Caractors Decipherment Approach
+https://chatgpt.com/share/6af42fe6-83e8-83e8-b4e4-5ec0879c9720 46/52
+Visual grammar versus character identity.
+For example, two symbols might share:
+Similar stroke thickness.
+Similar use of dots.
+Similar use of short horizontal lines.
+Similar curved geometric components.
+Similar construction of compound symbols.
+But they might represent entirely different characters.
+This is common in writing systems. Two scripts can share visual conventions with
+the same symbols or meanings.
+It could also indicate that the characters were produced by different people copy
+common writing tradition.
+I would record these stylistic similarities separately from actual character matche
+4. A particularly interesting research opportunity
+MacKay also discusses Phelps's May 1835 letter to his wife.
+Phelps included six characters associated with the gold plates, alongside phonet
+representations and English/Pure Language meanings.
+MacKay identifies four of those six as having similar counterparts in the surviving
+document. He argues that the Egyptian Alphabet subsequently incorporated som
+material. Dialogue Journal
+This is worth examining because it gives us another potential bridge between th
+It also means I want to revise my earlier recommendation slightly: rather than ex
+the Egyptian Alphabet entirely, we should preserve its earlier characters as a sep
+comparison dataset.
+My current recommendation: Don't attempt to decipher the Egyptian Alphabet
+and don't assume its characters belong to the same inventory as Whitmer's. But
+whether its earliest characters share components, construction rules, or individua
+with Caractors.
+I think your observation about the Cowdery/Williams pairs is particularly valuabl
+appear to preserve a different kind of evidence: not necessarily a matching chara
+attempt to associate a plate character with an English concept.
+That could eventually help us determine whether we're dealing with a logograph
+alphabetic, or mixed writing system.
+11/11/26, 2:06 AM Caractors Decipherment Approach
+https://chatgpt.com/share/6af42fe6-83e8-83e8-b4e4-5ec0879c9720 47/52
+You said:
+ChatGPT said:
+You made a keen observation I had forgotten. Yes, the
+of the Cowdery & Williams documents did have actua
+from the book of mormon. I assumed they were actua
+the observation that they're jibberish is interesting. An
+interesting note is that Cowdery was given a short op
+participate in actual translation, but failed and returne
+scribe. I'm not sure how many of the exact details are
+documented historically.
+The strange thing about the 4 characters which have a
+to the charactors document are that 3 of them are som
+similar to each other and have a similar english transla
+egyptian alphabet, however the english translation is
+word but a description so finding an exact match in th
+impossible, we'd have to search for synonyms. Also, th
+symbols seem somewhat out of place in the Characto
+because most symbols are very ornate and artistic wh
+are very angular and square, more like basic geometri
+The symbols approximately mean "God", "Sons of God
+"Angels", "Earth". Based on the previous estimated co
+ratio and my quick guestimate of the number of symb
+charactors document (not a precise count yet), my gu
+that the Charactors document represents approximate
+words or 1/2 page of english text in the book of morm
+matching symbols from the egyptian alphabet are sca
+the Charactors document, so we'd need to search in a
+200-word sliding chunks for a section that discusses t
+That may be an interesting experiment. These concep
+common so it may bring up multiple passages, but co
+interesting experiment.
+My gut is to ignore the Egyptian Alphabet for now, bu
+its existence for future analysis if our initial statistical a
+mainly because I don't know of any strong historical e
+the egyptian alphabet claims to be related to the boo
+and from my observation the style of the characters d
+they don't seem like the same language to me.
+I think your instinct to keep the Egyptian Alphabet out of the initial deciphermen
+is sensible. However, I've found a scholarly development that makes me reluctan
+it permanently.
+There's a 2023 research argument by Michael MacKay and Daniel Belnap that is
+relevant to what we're discussing. It actually proposes a historical connection be
+Caractors document, the Pure Language experiments, and the Egyptian Alphabe
+And interestingly, it supports part of your theory about the Egyptian Alphabet b
+attempt to create a new symbolic communication system rather than simply dec
+Worked for 28s
+11/11/26, 2:06 AM Caractors Decipherment Approach
+https://chatgpt.com/share/6af42fe6-83e8-83e8-b4e4-5ec0879c9720 48/52
+I want to explain that before getting into the computational implications, becaus
+us a valuable set of candidate meanings.
+1. Oliver Cowdery's failed translation attempt
+First, your recollection is correct. We have reasonably good historical documenta
+Oliver attempted to translate the Book of Mormon.
+The important sources are Doctrine and Covenants 8 and 9, received in April 182
+The sequence of events was:
+1. Oliver was serving as Joseph's scribe.
+2. He wanted to exercise the gift of translation himself.
+3. Joseph received a revelation promising Oliver the ability to translate.
+4. Oliver attempted to translate.
+5. He was unsuccessful.
+6. Joseph received another revelation explaining why.
+Doctrine and Covenants 9:7 gives the explanation:
+The revelation says Oliver needed to study the matter out in his mind before
+seeking confirmation.
+What do we actually know about his attempt?
+Surprisingly little.
+The Joseph Smith Papers editors acknowledge that the historical record doesn't
+mechanics of Oliver's attempt in detail.
+We don't know:
+How many words he attempted.
+Which portion of the plates he worked on.
+Whether he used the Urim and Thummim.
+Whether he attempted to translate characters visually.
+Whether he received anything that he believed was a translation.
+How long the attempt lasted.
+The most reliable evidence is the revelation itself, which says he began but didn'
+he had commenced.
+Joseph's later history also describes Oliver's desire and unsuccessful attempt.
+The important point for our research is that Oliver had firsthand exposure to Jos
+translation process, and then, several years later, participated in the Pure Langua
+Egyptian Alphabet experiments.
+That makes his documents particularly interesting as historical artifacts, even if w
+assume that his later linguistic theories were based on knowledge of the origina
+language. Church of Jes… +2
+Behold, you have not understood; you have supposed that I would give it unto
+you took no thought save it was to ask me.
+11/11/26, 2:06 AM Caractors Decipherment Approach
+https://chatgpt.com/share/6af42fe6-83e8-83e8-b4e4-5ec0879c9720 49/52
+2. The surprising connection: MacKay
+and Belnap's Pure Language research
+Important scholarly development
+The article is:
+Michael Hubbard MacKay and Daniel Belnap, "The Pure Language Project."
+Published in the Journal of Mormon History.
+Here's an interview with the researchers explaining their argument:
+The Pure Language Project and the Book of Abraham — Interview with MacKay
+Their argument is that the Egyptian Alphabet documents were part of a much br
+project that began around 1832, following Joseph Smith's vision recorded in Do
+Covenants 76.
+The researchers propose that Joseph and his associates were attempting to deve
+language capable of expressing spiritual and cosmological concepts more comp
+ordinary human language.
+That is remarkably close to your hypothesis.
+What was the purpose?
+The researchers suggest that Joseph Smith was trying to construct a symbolic sy
+of expressing concepts about:
+God.
+The Son of God.
+The Sons of God.
+Angels and ministering servants.
+Different states of existence.
+Celestial kingdoms.
+The organization of God's creation.
+The project apparently developed from a relatively simple vocabulary into a mor
+system of characters, definitions, and grammatical relationships.
+The researchers explicitly connect five historical documents:
+1. The 1832 Pure Language document.
+2. William W. Phelps's May 1835 letter.
+3. The Caractors document.
+4. The Egyptian Alphabet documents.
+5. The Grammar and Alphabet of the Egyptian Language.
+This is particularly interesting because they identify shared characters and conce
+structures across those documents. From the Desk +1
+3. The most interesting part: Phelps's 1835 letter
+This is where I think we have a potentially valuable connection.
+On May 26, 1835, William W. Phelps wrote a letter to his wife, Sally, containing s
+that he described as:
+a specimen of some of the "pure language."
+11/11/26, 2:06 AM Caractors Decipherment Approach
+https://chatgpt.com/share/6af42fe6-83e8-83e8-b4e4-5ec0879c9720 50/52
+The letter associates the characters with concepts in the Pure Language system.
+MacKay and Belnap compare these characters against the Caractors document a
+several as corresponding to characters found there.
+They then trace some of those characters into the Egyptian Alphabet documents
+Their proposed chain looks something like this:
+Caractors document
+Characters associated with the gold plates
+Phelps letter — May 1835
+Six characters associated with Pure Language concepts
+Egyptian Alphabet — 1835
+Characters incorporated into a larger symbolic system
+Grammar and Alphabet
+Expanded definitions and conceptual relationships
+MacKay and Belnap's proposed historical relationship, not a proven chain of direct copyin
+The researchers identify shared character shapes and a common conceptual fram
+also acknowledge that their reconstruction is not definitive. From the Desk
+Why this is important to your observation
+You mentioned that the four characters associated with the English descriptions
+angular and geometric than most of the ornate Caractors symbols.
+I think we should investigate that distinction rather than dismiss it.
+There are two possibilities:
+Possibility A: Different character families within one writing system.
+The ornate characters might represent ordinary textual writing, while the angula
+represent specialized semantic symbols.
+For example, a writing system might use:
+Ordinary phonetic characters.
+Logograms.
+Special religious symbols.
+Compound characters.
+That would explain why certain symbols look stylistically different.
+Possibility B: The characters were repurposed.
+The original characters might have been taken from the plate transcription and s
+incorporated into an entirely different symbolic system.
+11/11/26, 2:06 AM Caractors Decipherment Approach
+https://chatgpt.com/share/6af42fe6-83e8-83e8-b4e4-5ec0879c9720 51/52
+Their meanings in the Pure Language project would then be newly assigned mea
+necessarily their original meanings.
+I actually think possibility B deserves serious consideration.
+A character that originally meant something completely different could have bee
+new theological meaning in 1835.
+This is precisely why I would not immediately treat the Pure Language definition
+translations of the original plate characters.
+4. The five conceptual categories
+could be useful search anchors
+You mentioned approximate meanings of:
+God
+Sons of God
+Jesus
+Angels
+Earth
+The scholarly reconstruction of the Pure Language project discusses a closely rel
+conceptual hierarchy.
+Some of the terminology includes:
+The terminology and exact definitions vary across the documents, so I wouldn't t
+as a definitive dictionary.
+But it gives us something valuable: a small collection of semantic concepts assoc
+characters that researchers have identified as visually related to Caractors.
+There is a caveat, though.
+These meanings were recorded in 1832–1835. They may reflect Joseph Smith an
+associates' theological interpretations rather than the original meaning of the pl
+For decipherment, I would label them candidate semantic associations, not
+known translations.
+From the Desk +1
+5. How I would use these meanings
+in our decipherment experiment
+I actually like your 200-word sliding-window idea quite a bit.
+Pure Language term Associated concept
+Ahman God
+Son Ahman Son of God
+Sons Ahman Sons of God
+Angel/ministring servants Angels or ministering beings
+Earth/location concepts Physical location or sphere of existence
+11/11/26, 2:06 AM Caractors Decipherment Approach
+https://chatgpt.com/share/6af42fe6-83e8-83e8-b4e4-5ec0879c9720 52/52
