@@ -121,7 +121,7 @@ public static partial class App
         JsonIo.Write(Path.Combine(dir, "matches.json"), result);
         MatchingReportBuilder.Write(Path.Combine(dir, "matches.html"), result, corpus, stream, inventory);
 
-        Console.WriteLine($"match {stream.Doc}: best fingerprint {result.Fingerprints.FirstOrDefault()?.Score:0.000}, best passage {result.Passages.FirstOrDefault()?.Combined:0.000}");
+        Console.WriteLine($"match {stream.Doc}: best fingerprint {(result.Fingerprints.FirstOrDefault()?.Score ?? 0):0.000}, best passage {(result.Passages.FirstOrDefault()?.Combined ?? 0):0.000}" + (result.Passages.Count == 0 ? " (no window passed the multi-constraint gate)" : ""));
         foreach (var h in result.Fingerprints.Take(8))
             Console.WriteLine($"  A {h.Score:0.000}  {h.ClassId} ({h.Occurrences}x) <-> \"{h.Phrase}\" ({h.PhraseOccurrences}x)");
         foreach (var p in result.Passages.Take(5))

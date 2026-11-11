@@ -78,11 +78,12 @@ public static partial class App
 
         Verbs
           extract       Segment glyph images out of the source documents and write document.json,
-                        per-glyph crops (out/<DOC>/crops) and 64x64 normalised masks.
+                        per-glyph crops (out/<DOC>/crops) and 96x96 normalised masks.
           cluster       Compare glyph shapes and rank candidate duplicate pairs.
           review        Write the human review sheet (review.html) for a document.
           corpus        fetch|build the Book of Mormon text corpus.
           inventory     Group glyphs into canonical classes at one or more similarity thresholds.
+                        Writes one inventory file per threshold plus labels-<DOC>-tNNN.json.
           analyze       Structural tests: row geometry, black square, tick glyphs, compression.
           match         Run the decipherment search (fingerprints, joint constraints, alignment, anchors).
           significance  Randomised controls, FDR correction and held-out validation.
