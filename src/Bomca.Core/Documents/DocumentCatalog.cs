@@ -16,6 +16,8 @@ public sealed class DocumentSpec
     public string? Notes;
     /// <summary>Normalised coordinates for the four labelled Cowdery/Williams glyphs live in a review file.</summary>
     public string? RegionFile;
+    /// <summary>Approximate inked area of the surviving fragment, in inches (width x height).</summary>
+    public (double W, double H) FragmentInches = (7.2, 3.0);
 }
 
 /// <summary>
@@ -69,6 +71,7 @@ public static class DocumentCatalog
             SingleRow = true,
             SourceUrl = "https://www.josephsmithpapers.org/",
             Notes = "Secondary dataset. Three engraved lines said to be copied from the plates.",
+            FragmentInches = (7.0, 1.1),
             Params = new SegmentationParams
             {
                 SkipTitleRow = false,

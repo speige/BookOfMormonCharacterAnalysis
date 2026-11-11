@@ -8,7 +8,7 @@ namespace Bomca.Core.Segmentation;
 
 public sealed class PageSegmenter
 {
-    public const int NormSize = 64;
+    public const int NormSize = 96;
 
     public sealed class Options
     {
@@ -39,8 +39,33 @@ public sealed class PageSegmenter
         }
 
         var flat = gray.FlattenIllumination(p.BackgroundRadius);
-        var thr = p.InkThresholdAbsolute > 0 ? p.InkThresholdAbsolute : flat.Mean() * p.InkThresholdFactor;
+
+        // Polarity: some source images are inverted (light strokes on a dark ground, e.g. a scanned
+        // broadside). Detect it from the fact that "ink" would cover most of the page, then flip.
+        if (flat.Mean() < 110)
+        {
+            var invertedRaw = new float[flat.Px.Length];
+            for (var i = 0; i < flat.Px.Length; i++) invertedRaw[i] = 255f - flat.Px[i];
+            flat = new GrayImage(flat.Width, flat.Height, invertedRaw);
+        }
+
+        // The ink threshold takes the more inclusive of a mean-based cut and Otsu: faint or low-contrast
+        // sources (an inverted scan, a faded page) are only separated correctly by the histogram split.
+        var thr = p.InkThresholdAbsolute > 0
+            ? p.InkThresholdAbsolute
+            : Math.Max(flat.Mean() * p.InkThresholdFactor, flat.Otsu());
         var ink = BoolMask.FromGray(flat, thr);
+        if (ink.Count() > flat.Px.Length * 0.45)
+        {
+            // Still the wrong way round: invert and retry once.
+            var flipped = new float[flat.Px.Length];
+            for (var i = 0; i < flat.Px.Length; i++) flipped[i] = 255f - flat.Px[i];
+            flat = new GrayImage(flat.Width, flat.Height, flipped);
+            thr = p.InkThresholdAbsolute > 0
+                ? p.InkThresholdAbsolute
+                : Math.Max(flat.Mean() * p.InkThresholdFactor, flat.Otsu());
+            ink = BoolMask.FromGray(flat, thr);
+        }
 
         foreach (var ex in p.Exclusions)
         {
@@ -74,8 +99,11 @@ public sealed class PageSegmenter
             if (c.Area < p.MinComponentArea) continue;
             // Reject paper-edge shadows and torn-border artefacts before they can seed a row.
             var b = c.Bounds;
-            var isBorderLine = b.W >= gray.Width * 0.5 && b.H <= gray.Height * 0.08;
-            var touchesBorder = b.X <= 2 || b.Y <= 2 || b.Right >= ink.Width - 2 || b.Bottom >= ink.Height - 2;
+            // A tight line crop legitimately has ink touching its edges, so border rejection only applies to
+            // full-page scans where the frame/shadow is an artefact.
+            var isBorderLine = !opt.SingleRow && b.W >= gray.Width * 0.5 && b.H <= gray.Height * 0.08;
+            var touchesBorder = !opt.SingleRow &&
+                                (b.X <= 2 || b.Y <= 2 || b.Right >= ink.Width - 2 || b.Bottom >= ink.Height - 2);
             if (isBorderLine || touchesBorder)
             {
                 doc.Rejected.Add(new SegmentRejection { X = b.X, Y = b.Y, W = b.W, H = b.H, Area = c.Area, Reason = isBorderLine ? "border-line" : "touches-border" });
@@ -331,7 +359,7 @@ public sealed class PageSegmenter
         var tightMask = localMask.Crop(tight);
         var tightGray = crop.Crop(tight);
 
-        var norm = tightMask.FitSquare(NormSize);
+        var norm = MomentNormalizer.Normalize(tightMask, NormSize);
         var normGray = tightGray.FitSquare(96);
 
         var id = $"{docCode}-L{rowIdx + 1:00}-{ordinal + 1:00}";

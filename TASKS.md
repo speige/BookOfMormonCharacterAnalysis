@@ -1,5 +1,31 @@
 # Caractors Decipherment — Task Checklist
 
+## Implementation status (updated after the first full run)
+
+All pipeline code is implemented and verified by `dotnet test` (23 tests, including a planted-signal
+end-to-end test) and by a full run over the real documents. Remaining work is **manual review**, not
+code.
+
+| Phase | Status | Notes |
+|---|---|---|
+| 0 Repository & contracts | Done | Solution, schemas-as-records, ID convention `W-L03-07`, image SHA-256 manifest |
+| 1 `extract` | Done | 7 rows / 258 glyphs (W), 3 rows / 50 glyphs (B); `overlay.png` + `contact-sheet.png` for review |
+| 2 `cluster` | Done | 4,780 scored pairs; `review.html` with accept/reject + decisions export |
+| 3 `corpus` | Done | 267,471 tokens, 6,605 verses, sanity gates pass, 11 targeted lookups stored |
+| 4 Inventory versions | Done | 7 thresholds per document incl. auto (mean + 1.25 σ); `labels-*.json` per version |
+| 5 Structure tests | Done | Size drift, trailing gaps, black square, comb glyphs, Zipf, repeat regularity, compression |
+| 6 `match` | Done | 4 scanners + bijection, stability re-check, bounded many-to-many alignment |
+| 7 `significance` | Done | Shuffled null, empirical p/z, BH-FDR, held-out split; verdicts auto-written |
+| 8 `report` | Done | `out/report.html`, run manifests in `out/runs.json` |
+| 9 Historical ledger | Done | `docs/claim-ledger.md`, two claims falsified against the corpus |
+| Manual: review clusters | **Open** | `out/W/review.html` |
+| Manual: label regions for C/FW | **Open** | `review/regions-C.json`, `review/regions-FW.json` |
+
+Key measured results are in `docs/findings.md`; the honest headline is that the current (automatic,
+over-fragmented) inventory produces **no significant match** (p = 0.29 vs 30 shuffled controls).
+
+---
+
 Derived from `LLM Conversation.txt` (ChatGPT share, 52 pp.) plus the user's stated preferences:
 
 - **Language:** C# for everything (CLI + libraries + report generation).
