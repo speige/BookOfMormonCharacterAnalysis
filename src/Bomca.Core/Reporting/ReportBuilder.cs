@@ -22,6 +22,7 @@ public static class ReportBuilder
         public List<StructureAnalysis> Analyses { get; set; } = new();
         public List<MatchResult> Matches { get; set; } = new();
         public List<SignificanceReport> Significance { get; set; } = new();
+        public List<External.ClaimVerificationResult> ClaimVerifications { get; set; } = new();
         public CorpusIndex? Corpus { get; set; }
         public List<string> ClaimLedger { get; set; } = new();
         public string? GitSha { get; set; }
@@ -149,8 +150,35 @@ public static class ReportBuilder
         }
         if (input.Significance.Count == 0) sb.Append("<p class=\"empty\">No significance run recorded.</p>\n");
 
+        // ---- external claim verification
+        sb.Append("<h2>6. External claim verification</h2>\n");
+        if (input.ClaimVerifications.Count == 0)
+        {
+            sb.Append("<p class=\"empty\">No external claim has been verified yet (run: bomca verify --source grover).</p>\n");
+        }
+        else
+        {
+            foreach (var v in input.ClaimVerifications)
+            {
+                sb.Append($"<h3>{Esc(v.Source)} vs {v.Doc}</h3>\n");
+                sb.Append($"<p>{Esc(v.OverallAssessment)}</p>\n");
+                sb.Append("<table><thead><tr><th>Test</th><th>Result</th></tr></thead><tbody>\n");
+                sb.Append($"<tr><td>Numeral-run test</td><td class=\"score\">{(v.ObservedRuns?.Count)} glyphs, {v.ObservedRuns?.Runs} runs (mean {v.ObservedRuns?.MeanRun:0.00}, longest {v.ObservedRuns?.MaxRun}); chance mean {v.NullRuns?.MeanRun:0.00}; p = {v.NumeralRunPValue}</td></tr>\n");
+                if (v.PositionalNumerals is { } pn)
+                    sb.Append($"<tr><td>Numeral-likeness at claimed positions</td><td class=\"score\">{pn.MeanScoreAtClaimed:0.000} vs {pn.MeanScoreRandomSameCount:0.000} random (p = {pn.PValue}, z = {pn.Z})</td></tr>\n");
+                var consistent = v.TextClaims.Count(t => t.Status == "consistent");
+                sb.Append($"<tr><td>Claimed calendar statements found in the corpus</td><td class=\"score\">{consistent} / {v.TextClaims.Count}</td></tr>\n");
+                foreach (var seg in v.Segments)
+                    sb.Append($"<tr><td>Segment {Esc(seg.Name)}</td><td class=\"score\">{seg.Glyphs} glyphs, median height {seg.MedianGlyphHeight:0.0}, {seg.Classes} classes, {seg.ClassOverlapWithOtherSegment:P0} class overlap</td></tr>\n");
+                foreach (var a in v.AnchorWindows)
+                    sb.Append($"<tr><td>Anchor probe {Esc(a.Segment)}</td><td class=\"score\">{Esc(a.Reference)}: {a.Hits} hits (excerpt control {a.ExcerptControlMean}, p = {a.ExcerptControlPValue}) &mdash; {Esc(a.Verdict)}</td></tr>\n");
+                sb.Append("</tbody></table>\n");
+                sb.Append($"<p class=\"small\"><a href=\"{v.Doc}/verify-grover.html\">full verification sheet</a></p>\n");
+            }
+        }
+
         // ---- claim ledger
-        sb.Append("<h2>6. Claim ledger</h2>\n");
+        sb.Append("<h2>7. Claim ledger</h2>\n");
         sb.Append("<p class=\"small\">Historical claims inherited from the research conversation, with the confidence we are willing to attach to them. ");
         sb.Append("These are context, not inputs to the algorithm.</p>\n<table><thead><tr><th>Claim</th><th>Confidence</th></tr></thead><tbody>\n");
         foreach (var claim in input.ClaimLedger)

@@ -1,0 +1,113 @@
+{
+  "schemaVersion": "1.0",
+  "source": "Jerry D. Grover Jr., 'Translation of the \"Caractors\" Document, Revised and Updated' (book, PDF) + Book of Mormon Conference 2017 talk transcript",
+  "method": "Logographic reading; Egyptian hieratic/Demotic + Mesoamerican (vigesimal) + Sumerian proto-cuneiform numerals; Crowley character numbering (C-1..C-230) as occurrence indices; read right-to-left; top four lines and bottom three lines treated as two different texts.",
+  "direction": "right-to-left",
+  "segments": [
+    {
+      "name": "topFourLines",
+      "rows": [1, 2, 3, 4],
+      "characterRange": [1, 99],
+      "translation": "In the nineteenth regnal year of Mosiah I, the Nephites exited over the mountains to the foreign speaking people of Mulek. These twenty thousand children of Mosiah1 traveled over the mountains for eleven days and then downriver on the east side of the River Sidon for eighty days reaching Zarahemla. And then it came to pass that after eleven years thus began the Period of the Seven Tribes. After the space of twenty-one more years had passed, Zeniff, with sixty of his people, departed. Fifty-three more years then passed; then the Limhites departed and obtained the Twenty-Four plates from the West in the Land of Desolation, returning upriver on the River of Lamanite Possessions. Seven years from the date of the departure to obtain the Jaredite plates, the Limhites traveled west, bringing the pure gold Jaredite plates to Mosiah2, which he translated. Previous to the arrival of the Limhites, Benjamin was made king in the second month of the four hundred and thirty-sixth year after Lehi left Jerusalem. At the age of eighty-three, king Benjamin ascended to eternity, which was four hundred seventy-nine years after Lehi left Jerusalem. King Benjamin's death occurred one and one third years before the arrival of the Limhites. Four years before the arrival of the Limhites, the Period of the Seven Tribes ended in conjunction with the Jubilee Year."
+    },
+    {
+      "name": "bottomThreeLines",
+      "rows": [5, 6, 7],
+      "characterRange": [100, 230],
+      "translation": "Sixty and one half months prior to the coming of Christ Samuel the Lamanite came to the Nephites and the Lamanites prophesying of darkness. The Nephite primary count calendar was shifted from the 1,000 Year Calendar to the Coming of Christ Calendar, effective retroactively nine years after the Coming of Christ Calendar started. The 600 year Lehi Departure Calendar period ended; in the ninety-second year of the Reign of the Judges, the First and Most High King, Christ the Son, came to the Land of Jerusalem; while he was born occurred two days of brightness. The Gaddianton tribe arose; Nephi2 departed. Siege of the Gaddianton robbers, praise voiced to God; a Jubilee Year takes place, which completes the Twelfth Jubilee Period of the 1,000 Year Calendar. On the first month of the one hundred and twenty-fifth year of the Reign of the Judges Calendar, Christ came at the time of darkness to the people. After remaining fifty weeks, in the twelfth month of the thirty-fourth year of the Coming of Christ Calendar, Christ ascends upward to heaven; the Reign of the Judges Calendar period ends; thus commences a period of truth and prosperity. Nephites seek after riches; the rise of the Fourth Generation is complete. Nephites retreated downriver on the River Bountiful to the north countries; Three Disciples departed. Innumerable multitudes of Lamanites came. The Nephites and the Lamanites are without Christ and God the Father, now choosing to be led by Satan. Moroni and Mormon are in the hands of Christ; three hundred eighty-four years."
+    }
+  ],
+  "numeralClaims": [
+    { "ids": ["C-5", "C-4"], "value": 19, "expression": "6 + 13" },
+    { "ids": ["C-26", "B26b"], "value": 11, "expression": "4 + 7" },
+    { "ids": ["C-33", "C-32"], "value": 21, "expression": "1 + 20" },
+    { "ids": ["C-39", "C-38"], "value": 53, "expression": "13 + 40" },
+    { "ids": ["C-47", "C-46", "C-45"], "value": 24, "expression": "9 + 5 + 10" },
+    { "ids": ["C-69", "C-68", "C-70", "C-71", "C-72", "C-73", "C-74"], "value": 436, "expression": "1 + 20 + 400 + 5 + 10" },
+    { "ids": ["C-76", "C-77", "C-78"], "value": 1.3333, "expression": "1 + 1/3" },
+    { "ids": ["C-85", "C-86"], "value": 83, "expression": "80 + 3" },
+    { "ids": ["C-88", "C-89", "C-90", "C-91", "C-92"], "value": 479, "expression": "9 + 20 + 400 + (5 x 10)" },
+    { "ids": ["C-101", "C-102"], "value": 60.5, "expression": "60 + 1/2" },
+    { "ids": ["C-122", "C-123", "C-124"], "value": 92, "expression": "2 + 80 + 10" },
+    { "ids": ["C-155", "C-156", "C-157", "C-158"], "value": 125, "expression": "30 + 80 + 11 + 4" },
+    { "ids": ["C-176", "C-177", "C-178"], "value": 34, "expression": "19 + 5 + 10" },
+    { "ids": ["C-223", "C-224", "C-225"], "value": 384, "expression": "300 + 80 + 4" }
+  ],
+  "numeralClaimInconsistencies": [
+    "Chapter 4 lists 'C-86, C-85 = 9 + 20 + 400 + (5 x 10) = 479' while chapter 11 lists 'C-86, C-85 = 80 + 3 = 83' and assigns 479 to C-88..C-92. The same two glyph ids therefore carry two different values in the published book.",
+    "Chapter 4 lists the 436 sequence as 'C-74, C-73, C-72, C-70, C-72, C-71, C-72', repeating C-72 three times and omitting C-69/C-68, while chapter 11 gives 'C-74, C-73, C-72, C-71, C-70, C-69, C-68'.",
+    "The 'sum' string for the 125 sequence reads '30 + 80 + 11 + 4 = 125' but 30+80+11+4 = 125 only if the 11 is a single glyph read as 11; the arithmetic is consistent but the decomposition mixes additive and multiplicative readings elsewhere."
+  ],
+  "characterGlosses": [
+    { "ids": ["C-61", "C-62", "C-63"], "gloss": "King Mosiah (Mosiah2)" },
+    { "ids": ["C-64", "C-65", "C-66", "C-67"], "gloss": "King Benjamin" },
+    { "ids": ["C-67"], "gloss": "king / accession" },
+    { "ids": ["C-68"], "gloss": "2nd month (Initial Series Introductory Glyph)" },
+    { "ids": ["C-69"], "gloss": "IGIS for Lehi departure (3 x 200 = 600)" },
+    { "ids": ["C-70"], "gloss": "10 years" },
+    { "ids": ["C-71"], "gloss": "5 years" },
+    { "ids": ["C-72"], "gloss": "400 years" },
+    { "ids": ["C-73"], "gloss": "20 years" },
+    { "ids": ["C-74"], "gloss": "1 year" },
+    { "ids": ["C-75"], "gloss": "anterior date indicator" },
+    { "ids": ["C-76", "C-77", "C-78"], "gloss": "and it had come to pass / 1 1/3 years" },
+    { "ids": ["C-79", "C-80", "C-81"], "gloss": "distance number introductory glyph" },
+    { "ids": ["C-82", "C-83", "C-84"], "gloss": "period ending glyph, seven tribes regnal period" },
+    { "ids": ["C-85", "C-86"], "gloss": "and it came to pass / behold (ADI/PE)" },
+    { "ids": ["C-87"], "gloss": "jubilee year glyph" },
+    { "ids": ["C-93", "C-94"], "gloss": "to rise, accession" },
+    { "ids": ["C-95", "C-96"], "gloss": "eternity" },
+    { "ids": ["C-100"], "gloss": "spacer" },
+    { "ids": ["C-101", "C-102"], "gloss": "60 1/2" },
+    { "ids": ["C-103"], "gloss": "months" },
+    { "ids": ["C-106", "C-107", "C-108"], "gloss": "came and prophesied of darkness" },
+    { "ids": ["C-109"], "gloss": "to the Nephites and Lamanites" },
+    { "ids": ["C-110"], "gloss": "Samuel the Lamanite" },
+    { "ids": ["C-111"], "gloss": "period ending / transition" },
+    { "ids": ["C-112"], "gloss": "1000 year calendar" },
+    { "ids": ["C-113"], "gloss": "going back" },
+    { "ids": ["C-114"], "gloss": "by means of" },
+    { "ids": ["C-115"], "gloss": "coming of Christ calendar" },
+    { "ids": ["C-116", "C-117"], "gloss": "nine" },
+    { "ids": ["C-118"], "gloss": "years" },
+    { "ids": ["C-125"], "gloss": "lord / king of gods" },
+    { "ids": ["C-126"], "gloss": "Christ the Son" }
+  ],
+  "textClaims": [
+    {
+      "claim": "The sign of Christ's birth came in the ninety-second year of the reign of the judges",
+      "pattern": "ninety and second year",
+      "expectedRefs": ["3 Nephi 1:13"]
+    },
+    {
+      "claim": "Christ came to the Nephites in the thirty and fourth year, in the first month",
+      "pattern": "thirty and fourth year",
+      "expectedRefs": ["3 Nephi 8:5"]
+    },
+    {
+      "claim": "The final battle was in the three hundred and eighty and fourth year",
+      "pattern": "three hundred and eighty and four years",
+      "expectedRefs": ["Mormon 6:5"]
+    },
+    {
+      "claim": "The reckoning was changed to the coming of Christ nine years after the sign",
+      "pattern": "nine years",
+      "expectedRefs": ["3 Nephi 2:8"]
+    },
+    {
+      "claim": "Samuel the Lamanite gave the sign five years before Christ (about 60 months)",
+      "pattern": "five years",
+      "expectedRefs": ["Helaman 14:2"]
+    },
+    {
+      "claim": "Mosiah began to reign 476 years after Lehi left Jerusalem and Benjamin died three years later (479)",
+      "pattern": "three years",
+      "expectedRefs": ["Mosiah 6:4", "Mosiah 6:5"]
+    },
+    {
+      "claim": "Twenty-four plates of the Jaredites were brought to Mosiah and translated",
+      "pattern": "twenty four plates",
+      "expectedRefs": ["Mosiah 8:9", "Mosiah 21:27", "Ether 1:2"]
+    }
+  ]
+}

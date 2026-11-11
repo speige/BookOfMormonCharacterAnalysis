@@ -23,6 +23,7 @@ dotnet run --project src/Bomca.Cli -- inventory --doc W
 dotnet run --project src/Bomca.Cli -- analyze --doc W
 dotnet run --project src/Bomca.Cli -- match --doc W
 dotnet run --project src/Bomca.Cli -- significance --doc W --iterations 200
+dotnet run --project src/Bomca.Cli -- verify --source grover --doc W   # external claim check
 dotnet run --project src/Bomca.Cli -- report          # -> out/report.html
 
 dotnet run --project src/Bomca.Cli -- all             # the whole pipeline
@@ -42,6 +43,7 @@ dotnet run --project src/Bomca.Cli -- all             # the whole pipeline
 | `out/<DOC>/analysis.json` | Structure tests: row geometry, size drift, trailing gaps, black square, comb glyphs, Zipf, compression. |
 | `out/<DOC>/matches.json` / `.html` | Fingerprints, passages, alignment evidence, anchor probes. |
 | `out/<DOC>/significance.json` | Null distribution, empirical p, z, FDR, held-out result, verdict. |
+| `out/<DOC>/verify-grover.json` / `.html` | Verification of Jerry Grover's published translation claim (see below). |
 | `out/report.html` | One self-contained report over all of the above. |
 | `out/runs.json` | Append-only run manifest (git SHA, arguments, timing, status). |
 
@@ -58,6 +60,27 @@ dotnet run --project src/Bomca.Cli -- all             # the whole pipeline
 (`[{ "x":…, "y":…, "w":…, "h":… }]`) to isolate the four labelled characters from the surrounding
 Latin text. Until then their automatic segmentation is useful for style comparison only, and they
 are never used in the decipherment search.
+
+## External claim verification
+
+`bomca verify --source grover` tests the published translation by Jerry D. Grover Jr.
+(`data/external/grover-claims.json`) without re-translating it. It checks the consequences that are
+independent of the claim:
+
+1. **Numeral-run test** (claim-free): numeral-like glyphs are identified from shape features alone
+   and their run structure is compared with random glyph sets. Grover's reading requires numerals to
+   form multi-glyph sequences.
+2. **Positional numeral test**: his Crowley character numbering (C-1…C-230) is mapped proportionally
+   onto our occurrences; are the glyphs at his numeral positions more numeral-like than chance?
+3. **Calendar claims vs the corpus**: every claimed date statement ("ninety and second year",
+   "thirty and fourth year", "three hundred and eighty and four years", …) is looked up in the text.
+4. **Segment comparison**: his claim that the top four lines and bottom three lines are different
+   texts predicts a measurable difference in glyph size and vocabulary.
+5. **Anchor probes**: does the claimed content concentrate in the corpus regions he names, with a
+   *real Book of Mormon excerpt* as the control (not just random words)?
+
+Three search variants are also available because of his method: `--reverse` (he reads right-to-left),
+`--split 2` (two independent texts) and `--exclude-numerals` (numerals carry dates, not words).
 
 ## Design decisions
 

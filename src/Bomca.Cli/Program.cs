@@ -45,6 +45,9 @@ public static partial class App
                 case "report":
                     code = RunReport(args);
                     break;
+                case "verify":
+                    code = RunVerify(args);
+                    break;
                 case "all":
                     code = await RunAll(args);
                     break;
@@ -87,6 +90,7 @@ public static partial class App
           analyze       Structural tests: row geometry, black square, tick glyphs, compression.
           match         Run the decipherment search (fingerprints, joint constraints, alignment, anchors).
           significance  Randomised controls, FDR correction and held-out validation.
+          verify        Test an external translation claim (e.g. --source grover) against the glyphs and corpus.
           report        Build the self-contained HTML report.
           all           Run the whole pipeline end to end with default settings.
           selftest      Run the synthetic end-to-end checks (fake corpus + fake symbols).
@@ -105,6 +109,12 @@ public static partial class App
           --threshold <0..1>        similarity threshold for the reported duplicate set (default 0.80)
           --top-k <n>               candidate pairs per glyph kept by the prefilter (default 40)
           --llm                     ask Ollama to adjudicate borderline pairs
+
+        Match options
+          --reverse                 read the glyph stream right-to-left (the external claim's direction)
+          --split <n>               search n independent segments of the document separately
+          --exclude-numerals        drop numeral-like glyphs before searching (numerals carry dates, not words)
+          --widen                   widen phrase targets with corpus-constrained synonyms (Ollama)
 
         Inventory options
           --thresholds 0.7,0.8,0.9  one inventory version per threshold

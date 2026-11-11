@@ -131,7 +131,29 @@ never as translations.
 - **Held-out**: the top hypothesis that has at least three occurrences in both halves of the glyph
   stream is re-scored on the untouched half against a shuffle of that same half.
 
-## 6. Structure tests
+## 6. External claim verification
+
+`bomca verify --source <name>` loads `data/external/<name>-claims.json` and tests only the
+consequences that are independent of the claim:
+
+| Test | What it assumes | What would falsify the claim |
+|---|---|---|
+| Numeral-run test | Numeral-like glyphs (comb bars, dots, solid marks) occur in consecutive sequences if the document contains dates | Scattered numerals (measured: mean run 1.04 vs 1.10 chance, p = 0.91) |
+| Positional numeral test | The claim's own character numbering can be mapped proportionally onto our occurrences | No enrichment of numeral-likeness at the claimed positions (measured p = 0.56) |
+| Calendar claims vs corpus | A claimed date statement should exist at the verse the claim names | Pattern absent, or present only elsewhere |
+| Segment comparison | Claimed separate texts differ in size/vocabulary | Identical size and full class overlap |
+| Anchor probe | Claimed content concentrates in the named corpus region, against a **real-excerpt** control | Peak outside the named region, or no better than an excerpt of the same length |
+
+The numeral classifier is deliberately transparent and untuned: it scores comb/tally bars
+(≥3 parallel strokes, wide box), dot-like or solid compact marks, and small isolated marks; it
+penalises glyphs with holes. It is a *falsification device*, not a recogniser, and a negative result
+is reported as weak evidence rather than a refutation.
+
+Three search options come directly from the external claim and are available independently:
+`--reverse` (right-to-left reading order), `--split <n>` (independent segments of the document) and
+`--exclude-numerals` (remove numeral-like glyphs from the word stream, since numerals encode dates).
+
+## 7. Structure tests
 
 | Test | Rationale |
 |---|---|

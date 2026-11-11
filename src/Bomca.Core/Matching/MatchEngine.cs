@@ -53,6 +53,34 @@ public sealed class GlyphStream
         };
     }
 
+    /// <summary>Reverse the stream: the claim under test reads right-to-left.</summary>
+    public GlyphStream Reversed()
+    {
+        var n = Length;
+        return new GlyphStream
+        {
+            Doc = Doc,
+            ClassIds = Enumerable.Range(0, n).Select(i => ClassIds[n - 1 - i]).ToArray(),
+            OccurrenceIds = Enumerable.Range(0, n).Select(i => OccurrenceIds[n - 1 - i]).ToArray(),
+            Rows = Enumerable.Range(0, n).Select(i => Rows[n - 1 - i]).ToArray(),
+            Threshold = Threshold,
+        };
+    }
+
+    /// <summary>Drop occurrences (by id) and renumber — used to remove numeral glyphs from the word stream.</summary>
+    public GlyphStream Excluding(HashSet<string> ids)
+    {
+        var keep = Enumerable.Range(0, Length).Where(i => !ids.Contains(OccurrenceIds[i])).ToArray();
+        return new GlyphStream
+        {
+            Doc = Doc,
+            ClassIds = keep.Select(i => ClassIds[i]).ToArray(),
+            OccurrenceIds = keep.Select(i => OccurrenceIds[i]).ToArray(),
+            Rows = keep.Select(i => Rows[i]).ToArray(),
+            Threshold = Threshold,
+        };
+    }
+
     public GlyphStream Half(int part, int parts = 2)
     {
         var lo = Length * part / parts;

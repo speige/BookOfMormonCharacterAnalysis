@@ -18,6 +18,7 @@ code.
 | 7 `significance` | Done | Shuffled null, empirical p/z, BH-FDR, held-out split; verdicts auto-written |
 | 8 `report` | Done | `out/report.html`, run manifests in `out/runs.json` |
 | 9 Historical ledger | Done | `docs/claim-ledger.md`, two claims falsified against the corpus |
+| 10 External claim verification | Done | `bomca verify --source grover`: numeral-run, positional, calendar, segment and anchor tests; adds `--reverse`, `--split`, `--exclude-numerals` |
 | Manual: review clusters | **Open** | `out/W/review.html` |
 | Manual: label regions for C/FW | **Open** | `review/regions-C.json`, `review/regions-FW.json` |
 

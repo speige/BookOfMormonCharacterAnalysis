@@ -27,3 +27,16 @@ The report reads this file directly (`Claim | Confidence` after a leading `- `).
 - Joseph Smith received roughly 20 words at a time | Skousen's reading of the manuscripts; suggestive, not a constraint here
 - The plates had roughly 30–86 sq ft of inscribed surface | Dale's estimate; wide error bars
 - The lost 116 pages remove any possible English counterpart | A real risk: if the passage is there, no search can succeed and a null result is uninformative
+
+## Jerry D. Grover Jr. (2017 book and talk) — verdicts from `bomca verify`
+
+- The Caractors document is logographic | Consistent with the symbol-count argument; this pipeline tests it rather than assuming it
+- The script reads right to left | Unresolved; distance-based scanners are direction-invariant, the alignment scanner scores 0.46 with `--reverse` vs 0.38 without, both within noise
+- About 43 of ~230 glyphs are numerals forming sequences of 2-7 | **Not supported** by glyph shapes (numeral-run p = 0.91; positional enrichment p = 0.56)
+- The top four lines and the bottom three lines are different texts | **Supported**: 1.35x size difference, 84% disjoint character sets
+- King Benjamin died 479 years after Lehi left Jerusalem | Consistent with the corpus (476 + the "three years" of Mosiah 6:5 = 479)
+- Christ's birth sign in the 92nd year of the judges | Present in the text (3 Nephi 1)
+- Christ's coming in the 34th year, first month | Present in the text (3 Nephi 8:5)
+- 384 years at the final battle | Present in the text (Mormon 6:5)
+- Samuel's prophecy about 60 months before Christ | Consistent (Helaman 14:2 "five years")
+- The published numeral tables reproduce his dates | **False as printed**: C-85/C-86 carry both 83 and 479, and the 436 sequence differs between chapters

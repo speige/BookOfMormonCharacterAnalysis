@@ -36,7 +36,7 @@ public static partial class App
         return (JsonIo.Read<InventoryVersion>(path), path);
     }
 
-    private static (GlyphStream stream, CorpusIndex corpus, InventoryVersion inventory) LoadMatchInputs(Args args)
+    private static (GlyphStream stream, CorpusIndex corpus, InventoryVersion inventory, Bomca.Core.Model.DocumentRecord doc) LoadMatchInputs(Args args)
     {
         var code = args.GetList("doc").FirstOrDefault() ?? "W";
         var corpusPath = Path.Combine(DerivedDir, args.Get("edition", "current") + ".json");
@@ -46,7 +46,7 @@ public static partial class App
         var (doc, _) = LoadDocument(code);
         var (inventory, _) = LoadInventory(code, args.Has("threshold") ? args.GetDouble("threshold", 0.8) : null);
         var stream = GlyphStream.FromDocument(doc, inventory);
-        return (stream, corpus, inventory);
+        return (stream, corpus, inventory, doc);
     }
 
     public static int RunAnalyze(Args args)
@@ -80,7 +80,22 @@ public static partial class App
 
     public static async Task<int> RunMatch(Args args)
     {
-        var (stream, corpus, inventory) = LoadMatchInputs(args);
+        var (stream, corpus, inventory, doc) = LoadMatchInputs(args);
+        if (args.Has("reverse"))
+        {
+            stream = stream.Reversed();
+            Console.WriteLine("match: reading direction reversed (right-to-left, as the external claim assumes)");
+        }
+        if (args.Has("exclude-numerals"))
+        {
+            var numeralIds = Bomca.Core.External.ClaimVerifier
+                .ScoreNumerals(doc.Symbols.Where(s => s.Note != "title-row"), args.GetInt("numeral-take", 40))
+                .Select(n => n.Id).ToHashSet(StringComparer.Ordinal);
+            var before = stream.Length;
+            stream = stream.Excluding(numeralIds);
+            Console.WriteLine($"match: excluded {before - stream.Length} numeral-like glyphs from the word stream");
+        }
+        var split = args.GetInt("split", 1);
         var opt = new MatchOptions
         {
             MinOccurrences = args.GetInt("min-occurrences", 3),
@@ -112,7 +127,9 @@ public static partial class App
             JsonIo.Write(Path.Combine(OutRoot, stream.Doc, "synonyms.json"), expansions);
         }
 
-        var result = MatchEngine.Run(stream, corpus, opt, Console.WriteLine);
+        var result = split > 1
+            ? RunSplitMatch(stream, corpus, opt, split)
+            : MatchEngine.Run(stream, corpus, opt, Console.WriteLine);
         result.Notes.Add(widen
             ? "Synonym widening was enabled: phrase targets include model-proposed near-synonyms drawn from the corpus vocabulary."
             : "Synonyms were not widened; targets are literal corpus phrases. Use --widen to widen the search.");
@@ -129,9 +146,31 @@ public static partial class App
         return 0;
     }
 
+    /// <summary>
+    /// Run the engine on independent segments of the document. An external claim that the top and bottom of
+    /// the page are different texts implies exactly this treatment; it also stops class statistics from one
+    /// text polluting the other.
+    /// </summary>
+    private static MatchResult RunSplitMatch(GlyphStream stream, CorpusIndex corpus, MatchOptions opt, int parts)
+    {
+        var merged = MatchEngine.Run(stream.Half(0, parts), corpus, opt, m => Console.WriteLine("  " + m));
+        merged.Notes.Add($"Document was split into {parts} independent segments before searching.");
+        for (var i = 1; i < parts; i++)
+        {
+            var part = MatchEngine.Run(stream.Half(i, parts), corpus, opt, m => Console.WriteLine("  " + m));
+            foreach (var f in part.Fingerprints) f.Method += $"/seg{i + 1}";
+            foreach (var p in part.Passages) p.Method += $"/seg{i + 1}";
+            merged.Fingerprints.AddRange(part.Fingerprints);
+            merged.Passages.AddRange(part.Passages);
+            merged.Fingerprints = merged.Fingerprints.OrderByDescending(f => f.Score).Take(opt.MaxHypotheses).ToList();
+            merged.Passages = merged.Passages.OrderByDescending(p => p.Combined).Take(opt.PassageTake).ToList();
+        }
+        return merged;
+    }
+
     public static async Task<int> RunSignificance(Args args)
     {
-        var (stream, corpus, _) = LoadMatchInputs(args);
+        var (stream, corpus, _, _) = LoadMatchInputs(args);
         var opt = new MatchOptions
         {
             MinOccurrences = args.GetInt("min-occurrences", 3),

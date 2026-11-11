@@ -2,6 +2,116 @@
 
 Append-only. Newest run first. Every number here is reproducible with the commands shown.
 
+## 2026-02-11 — external claim verification (Jerry D. Grover Jr.)
+
+Source: *Translation of the "Caractors" Document, Revised and Updated* (book) and the 2017 Book of
+Mormon Conference talk. Command: `bomca verify --source grover --doc W`.
+
+### What the claim asserts
+
+- The script is **logographic**; reads **right to left**; about 230 characters in two texts.
+- **Numerals** are a large share of the glyphs (~43 of ~230 by his own numbering) drawn from Egyptian
+  hieratic/Demotic, Mesoamerican (dot/bar, vigesimal), and Sumerian proto-cuneiform sources.
+- Top four lines: a chronological summary from the 19th regnal year of Mosiah I to the death of king
+  Benjamin (**479 years after Lehi's departure**). Bottom three lines: a prophetic-calendar synopsis
+  from Samuel the Lamanite (≈60½ months before Christ) to **384 years** after Christ's coming.
+
+### Result 1 — text/chronology side: 6 of 7 claims match the corpus
+
+| Claim | Pattern | Status |
+|---|---|---|
+| Sign of Christ's birth in the 92nd year of the judges | `ninety and second year` | present (3 Nephi 1) |
+| Christ comes in the 34th year, first month | `thirty and fourth year` | present (3 Nephi 8:5) |
+| Final battle in the 384th year | `three hundred and eighty and four years` | present (Mormon 6:5) |
+| Reckoning changed nine years after the sign | `nine years` | present (3 Nephi 2) |
+| Samuel's sign five years before Christ (≈60 months) | `five years` | present (Helaman 14:2) |
+| Benjamin dies three years after Mosiah begins (476 + 3 = 479) | `three years` | present (Mosiah 6:4–5) |
+| 24 Jaredite plates brought and translated | `twenty four plates` | present (Mosiah 8, 21; Ether 1) |
+
+Every date he claims to read is a date the Book of Mormon itself contains or implies. His 479 is
+exactly the conventional chronology: 600 − 121 = 479 for Benjamin's death. This is genuine internal
+consistency — but it is *also* what a translator working from the chronology would produce, which he
+acknowledges. It cannot, on its own, distinguish reading from reconstruction.
+
+### Result 2 — glyph side: his numeral prediction is not supported
+
+- **Numeral-run test (claim-free).** Only 24 of 258 extracted glyphs score as numeral-like from shape
+  features alone, and they are *scattered*: mean run length 1.04 vs 1.10 for random glyph sets,
+  longest run 2 (p = 0.91, z = −0.88). His reading requires runs of 2–7 consecutive numerals.
+- **Positional numeral test.** Mapping his Crowley ids (C-1…C-230, split 1–99 / 100–230) proportionally
+  onto our 258 occurrences gives 43 claimed numeral positions. Their mean numeral-likeness is 0.041
+  vs 0.044 at random positions (p = 0.56, z = −0.17). No enrichment at the claimed places.
+- **Caveat.** Both tests depend on my segmentation (258 glyphs for a document he numbers at ~230) and
+  on a deliberately crude, transparent numeral classifier. The negative result is evidence against the
+  strong form of the claim, not a refutation: his numerals include forms (dots *inside* glyphs,
+  curvy variants) that no shape heuristic can be expected to catch from 96×96 crops.
+
+### Result 3 — his two-text structure is supported
+
+| Segment | Glyphs | Median glyph height | Classes | Class overlap with other segment |
+|---|---|---|---|---|
+| top four lines | 109 | 111 px | 77 | 16 % |
+| bottom three lines | 107 | 82 px | 88 | 14 % |
+
+The bottom three lines are written **1.35× smaller**, use a largely different character set, and match
+the independent measurement in `analysis.json` (glyph height falls 10.3 px per row, R² 0.55). His
+observation that the document contains two different texts in two different hands/sizes is supported.
+
+### Result 4 — claimed content does not concentrate where the claim says (except partly)
+
+Anchor probes with a *real-excerpt* control:
+
+| Segment | Best window | Hits | Control mean | p | Verdict |
+|---|---|---|---|---|---|
+| top four lines (Mosiah-era claim) | Alma 8:1 | 33 | 12.6 | 0.03 | concentrated, but **outside** the named era |
+| bottom three lines (3 Nephi / Mormon-era claim) | 3 Nephi 2:4 | 34 | 12.6 | 0.02 | concentrated **inside** the named era |
+
+One of the two lands where he says. Both peak scores are also only ~2.5× the control mean, and the
+whole translation is written in Book-of-Mormon vocabulary, so the probe mostly confirms that his text
+is BoM-flavoured rather than that it is the right passage.
+
+### Result 5 — his published tables contain internal contradictions
+
+- The same two glyphs (C-85, C-86) carry two different values: **83** (chapter 11) and **479**
+  (chapter 4), where chapter 11 assigns 479 to C-88…C-92.
+- The 436 sequence is printed as `C-74, C-73, C-72, C-70, C-72, C-71, C-72` in chapter 4 (C-72 three
+  times, C-69/C-68 missing) but `C-74, C-73, C-72, C-71, C-70, C-69, C-68` in chapter 11.
+
+A reader cannot reproduce the two dates that anchor his whole chronology from the published tables as
+printed. This does not make the translation wrong, but it means the claim is not yet self-consistent
+enough to be independently checked character by character.
+
+### Result 6 — search variants derived from his method
+
+| Variant | Best passage score | Top window |
+|---|---|---|
+| baseline | 0.377 | Omni 1:17 |
+| `--reverse` (right-to-left) | 0.464 | Helaman 11:11 |
+| `--split 2` (two texts) | 0.420 | 1 Nephi 22:12 |
+| `--exclude-numerals` | 0.422 | 3 Nephi 19:8 |
+| `--reverse --split 2` | 0.380 | Alma 46:13 |
+
+All variants sit inside the noise band established by the shuffle control (observed 0.837 vs null
+0.829 ± 0.010, p = 0.29 with alignment disabled, which is the statistic the harness uses). Right-to-left
+reading gives the highest score, but not significantly so. Notably, the baseline now ranks **Omni 1:17**
+first — the verse that introduces the Mosiah-era migrations — which is at least in the era Grover's top
+segment describes, though the score is indistinguishable from noise.
+
+### Overall assessment of the claim
+
+- **Structurally plausible**: the two-text split, the size difference, the direction and the
+  logographic density argument are all consistent with the physical evidence.
+- **Chronologically coherent**: every date he reads is in the Book of Mormon or implied by it.
+- **Not independently supported at the glyph level**: the numerals he claims are not distinguishable
+  as numerals in the images, in runs or in position.
+- **Not reproducible from the published tables**: two of the three tables that carry his key dates
+  contradict each other.
+- The strongest statement this pipeline can make is that his claim survives the *textual* consistency
+  test and fails the *glyph-shape* test, in a document where my segmentation is still ~12 % over
+  fragmented. A cleaner inventory plus his per-character scan images would be needed to do better.
+
+---
+
 ## 2026-02-11 — first full pipeline run
 
 Commands: `extract --doc all`, `corpus fetch/build`, `cluster -–doc W --top-k 40`,

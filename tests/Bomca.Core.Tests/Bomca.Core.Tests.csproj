@@ -11,4 +11,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\Bomca.Core\Bomca.Core.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\data\external\grover-claims.json" Link="grover-claims.json" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
 </Project>

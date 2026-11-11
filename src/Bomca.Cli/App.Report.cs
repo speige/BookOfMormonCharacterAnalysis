@@ -52,6 +52,9 @@ public static partial class App
 
             var sigPath = Path.Combine(dir, "significance.json");
             if (File.Exists(sigPath)) input.Significance.Add(JsonIo.Read<SignificanceReport>(sigPath));
+
+            foreach (var verifyPath in Directory.GetFiles(dir, "verify-*.json"))
+                input.ClaimVerifications.Add(JsonIo.Read<Bomca.Core.External.ClaimVerificationResult>(verifyPath));
         }
 
         input.ClaimLedger = LoadClaimLedger();
