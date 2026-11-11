@@ -126,7 +126,8 @@ public static partial class App
             }
             var record = JsonIo.Read<ClusterRecord>(pairsPath);
             var autoThreshold = AutoThreshold(record.Pairs);
-            if (!thresholds.Contains(autoThreshold)) thresholds = thresholds.Append(autoThreshold).ToList();
+            thresholds = thresholds.Select(t => Math.Round(t, 2)).Distinct().OrderBy(t => t).ToList();
+            if (!thresholds.Contains(autoThreshold)) thresholds = thresholds.Append(autoThreshold).OrderBy(t => t).ToList();
             Console.WriteLine($"inventory {code}: auto threshold from pair-score distribution = {autoThreshold:0.00}");
 
             var versions = new List<object>();

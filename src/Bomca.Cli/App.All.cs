@@ -13,7 +13,7 @@ public static partial class App
         if (!File.Exists(Path.Combine(DerivedDir, "current.json")))
         {
             Step("corpus fetch");
-            await RunCorpus(new ArgsBuilder().Verb("corpus").Opt("edition", "current").Build() is var _ ? Args.Parse(new[] { "corpus", "fetch", "--edition", "current" }) : Args.Parse(new[] { "corpus" }));
+            await RunCorpus(Args.Parse(new[] { "corpus", "fetch", "--edition", "current" }));
         }
         Step("corpus build");
         RunCorpus(Args.Parse(new[] { "corpus", "build" }));
