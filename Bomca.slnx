@@ -1,0 +1,9 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Bomca.Cli/Bomca.Cli.csproj" />
+    <Project Path="src/Bomca.Core/Bomca.Core.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Bomca.Core.Tests/Bomca.Core.Tests.csproj" />
+  </Folder>
+</Solution>

@@ -1,0 +1,10 @@
+bin/
+obj/
+out/
+*.user
+.vs/
+TestResults/
+data/derived/corpus/1830-pages/
+data/raw/corpus/1830-pages/
+data/raw/corpus/*.json
+data/raw/corpus/1830-combined.md
