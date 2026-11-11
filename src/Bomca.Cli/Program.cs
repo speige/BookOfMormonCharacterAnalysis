@@ -48,6 +48,9 @@ public static partial class App
                 case "verify":
                     code = RunVerify(args);
                     break;
+                case "focus":
+                    code = RunFocus(args);
+                    break;
                 case "all":
                     code = await RunAll(args);
                     break;
@@ -91,6 +94,8 @@ public static partial class App
           match         Run the decipherment search (fingerprints, joint constraints, alignment, anchors).
           significance  Randomised controls, FDR correction and held-out validation.
           verify        Test an external translation claim (e.g. --source grover) against the glyphs and corpus.
+          focus         Fuzzy contextual search: where does an approximate paraphrase belong? Writes a focus
+                        file that 'match --focus' uses to skip the exhaustive corpus scan.
           report        Build the self-contained HTML report.
           all           Run the whole pipeline end to end with default settings.
           selftest      Run the synthetic end-to-end checks (fake corpus + fake symbols).
@@ -115,6 +120,8 @@ public static partial class App
           --split <n>               search n independent segments of the document separately
           --exclude-numerals        drop numeral-like glyphs before searching (numerals carry dates, not words)
           --widen                   widen phrase targets with corpus-constrained synonyms (Ollama)
+          --focus <file>            restrict the window scanner to focused regions (bomca focus output)
+          --focus-auto              same, using out/<DOC>/focus-<source>.json
 
         Inventory options
           --thresholds 0.7,0.8,0.9  one inventory version per threshold

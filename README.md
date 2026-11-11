@@ -23,6 +23,8 @@ dotnet run --project src/Bomca.Cli -- inventory --doc W
 dotnet run --project src/Bomca.Cli -- analyze --doc W
 dotnet run --project src/Bomca.Cli -- match --doc W
 dotnet run --project src/Bomca.Cli -- significance --doc W --iterations 200
+dotnet run --project src/Bomca.Cli -- focus --source grover            # fuzzy contextual search -> focus file
+dotnet run --project src/Bomca.Cli -- match --doc W --focus-auto      # exhaustive search on ~3k words, not 267k
 dotnet run --project src/Bomca.Cli -- verify --source grover --doc W   # external claim check
 dotnet run --project src/Bomca.Cli -- report          # -> out/report.html
 
@@ -44,6 +46,7 @@ dotnet run --project src/Bomca.Cli -- all             # the whole pipeline
 | `out/<DOC>/matches.json` / `.html` | Fingerprints, passages, alignment evidence, anchor probes. |
 | `out/<DOC>/significance.json` | Null distribution, empirical p, z, FDR, held-out result, verdict. |
 | `out/<DOC>/verify-grover.json` / `.html` | Verification of Jerry Grover's published translation claim (see below). |
+| `out/<DOC>/focus-grover.json` / `.html` | Fuzzy contextual search: the corpus regions where the paraphrase fits, and the closest verses. |
 | `out/report.html` | One self-contained report over all of the above. |
 | `out/runs.json` | Append-only run manifest (git SHA, arguments, timing, status). |
 
@@ -81,6 +84,11 @@ independent of the claim:
 
 Three search variants are also available because of his method: `--reverse` (he reads right-to-left),
 `--split 2` (two independent texts) and `--exclude-numerals` (numerals carry dates, not words).
+
+Because his translation is a paraphrase rather than corpus phrasing, `bomca focus` runs a
+lemma-aware, IDF-weighted fuzzy search for where each segment *belongs* (Mosiah 5 and 3 Nephi 1 for the
+two segments, p = 0.024), then `match --focus-auto` searches only those 3,100 words. That is 86x less
+corpus and 23x faster window scanning, with a better best-passage score (0.445 vs 0.377 unrestricted).
 
 ## Design decisions
 

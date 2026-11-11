@@ -96,6 +96,7 @@ public static partial class App
             Console.WriteLine($"match: excluded {before - stream.Length} numeral-like glyphs from the word stream");
         }
         var split = args.GetInt("split", 1);
+
         var opt = new MatchOptions
         {
             MinOccurrences = args.GetInt("min-occurrences", 3),
@@ -109,6 +110,26 @@ public static partial class App
         };
         if (args.GetList("windows").Count > 0)
             opt.WindowSizes = args.GetList("windows").Select(int.Parse).ToArray();
+
+        if (args.Has("focus") || args.Has("focus-auto"))
+        {
+            var focusPath = args.Get("focus", "");
+            if (focusPath.Length == 0)
+            {
+                var auto = Path.Combine(OutRoot, stream.Doc, $"focus-{args.Get("source", "grover")}.json");
+                focusPath = auto;
+            }
+            if (!File.Exists(focusPath))
+            {
+                Console.Error.WriteLine($"match: focus file not found ({focusPath}); run 'bomca focus' first");
+                return 1;
+            }
+            var focus = JsonIo.Read<Bomca.Core.Semantic.ContextualSearchResult>(focusPath);
+            opt.FocusRegions = focus.Regions.Select(r => (r.Start, r.End)).ToList();
+            Console.WriteLine($"match: restricted to {opt.FocusRegions.Count} focused region(s), " +
+                              $"{opt.FocusRegions.Sum(r => r.End - r.Start):N0} of {corpus.Length:N0} words " +
+                              $"({focus.SearchReductionFactor:0.0}x reduction)");
+        }
 
         var widen = args.Has("widen");
         if (widen)

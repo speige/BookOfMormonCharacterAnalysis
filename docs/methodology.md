@@ -153,7 +153,29 @@ Three search options come directly from the external claim and are available ind
 `--reverse` (right-to-left reading order), `--split <n>` (independent segments of the document) and
 `--exclude-numerals` (remove numeral-like glyphs from the word stream, since numerals encode dates).
 
-## 7. Structure tests
+## 7. Fuzzy contextual search (short-circuit)
+
+An external translation is a paraphrase, so it cannot be used as a phrase key. `bomca focus` locates the
+corpus regions where a paraphrase belongs and writes a focus file; `bomca match --focus` restricts the
+window scanner to those regions.
+
+Scoring, for every sliding window of `--window` words at `--stride`:
+
+1. **Lemma folding** of both the query and the corpus (irregular verb map + `-eth/-ieth/-ies/-ing/-ed/-es`
+   stripping) so that modern paraphrase and archaic text meet.
+2. **IDF-weighted coverage**: each distinct query lemma is weighted by `log(N / (1+df))`, matched exactly
+   (weight 1.0) or through a corpus-constrained synonym (0.7).
+3. **Distinct-term floor**: `score = 0.55 × weighted coverage + 0.45 × share of query terms matched`, so a
+   window full of one frequent word cannot outrank a window with broad coverage.
+4. **Controls**: the same terms shuffled (frequency preserving) sampled across the corpus.
+5. **Region merging**: the top windows per segment are merged into contiguous regions; the merged list is
+   what the symbol search uses.
+
+The window scanner then only evaluates windows whose centre lies inside a focus region. Everything else
+in the corpus is skipped, which is the intended trade: exhaustive depth on a few thousand words instead
+of a shallow pass over 267k.
+
+## 8. Structure tests
 
 | Test | Rationale |
 |---|---|

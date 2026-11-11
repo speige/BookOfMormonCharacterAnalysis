@@ -2,6 +2,55 @@
 
 Append-only. Newest run first. Every number here is reproducible with the commands shown.
 
+## 2026-02-11 — fuzzy contextual search (short-circuiting the exhaustive scan)
+
+Command: `bomca focus --source grover` then `bomca match --doc W --focus-auto`.
+Artifact: `out/W/focus-grover.{json,html}`, `out/W/focus-grover-verses.json`.
+
+Grover's translation is a paraphrase in modern English, not corpus phrasing, so exact-phrase search
+cannot use it. The new `focus` step scores sliding windows by **lemma-aware, IDF-weighted coverage** of
+the paraphrase's content terms, with a floor on *distinct* term coverage so one common word cannot carry
+a window, plus optional corpus-constrained synonym expansion. Ancient-register forms are folded
+(`came→come`, `cometh→come`, `prophesied→prophesy`, `nephites→nephite`, `destruction→destroy`) and
+plural/tense suffixes are stripped.
+
+### Where the paraphrase lands
+
+| Segment | Best window | Score | Control | p | Second region |
+|---|---|---|---|---|---|
+| top four lines (Mosiah I → Benjamin's death) | **Mosiah 5:15** | 0.327 | 0.126 | 0.024 | Mosiah 7:29 |
+| bottom three lines (Samuel → 384 AD) | **3 Nephi 1:23** | 0.282 | 0.132 | 0.024 | 4 Nephi 1:33 |
+
+Both segments land in the eras the claim itself names — Mosiah for the top text, 3 Nephi / 4 Nephi for
+the bottom text — at p = 0.024 against a fixed control. This is the strongest support found so far for
+the *content* of his claim, and it is a different test from the earlier anchor probe (which used raw
+word density); the lemma folding is what makes "passed away / died / ascended to eternity" count as the
+same evidence.
+
+### What the short-circuit buys
+
+| Search | Regions | Words scanned | Scanner B time | Best passage |
+|---|---|---|---|---|
+| unrestricted | — | 267,471 | 4,617 ms | 0.377 |
+| `--focus-auto` | 4 | 3,100 (86×) | **201 ms** | **0.445** |
+| `--focus-auto --reverse` | 4 | 3,100 | 188 ms | 0.826 (warp, no alignment) |
+
+Restricting to 3,100 words makes the window scan **23× faster** and produces a *better* candidate list,
+because windows outside the focus can no longer win by coincidence. That is exactly the intended effect:
+search the plausible few thousand words exhaustively instead of the whole book superficially.
+
+### Honest caveats
+
+- Both focus scores are modest in absolute terms (0.28–0.33). The regions are plausible, not identified.
+- The control is a fixed stride sample plus the paraphrase's own terms shuffled; it is not a matched
+  semantic control, so p = 0.024 should be read as "better than this crude baseline", not as a calibrated
+  significance value.
+- 86× reduction is bounded by `--regions-per-segment 2`; raising it buys safety, not certainty.
+- The `focus` ranking is corpus-side only. It says where the paraphrase *fits*, which is exactly the
+  hypothesis the symbol search then has to confirm or reject.
+
+---
+
 ## 2026-02-11 — external claim verification (Jerry D. Grover Jr.)
 
 Source: *Translation of the "Caractors" Document, Revised and Updated* (book) and the 2017 Book of

@@ -186,6 +186,10 @@ public sealed class MatchOptions
     };
     public int AnchorWindow { get; set; } = 200;
     public double GapWeight { get; set; } = 1.0;
+    /// <summary>
+    /// Restrict the window scanner to these corpus regions (from 'bomca focus'). Empty = scan everywhere.
+    /// </summary>
+    public List<(int Start, int End)> FocusRegions { get; set; } = new();
     /// <summary>Compression bounds used to reject implausible document spans.</summary>
     public double MinWordsPerGlyph { get; set; } = 0.8;
     public double MaxWordsPerGlyph { get; set; } = 12.0;
@@ -229,6 +233,8 @@ public static class MatchEngine
                 ["windowSizes"] = string.Join(",", opt.WindowSizes),
                 ["warpStride"] = opt.WarpStride.ToString(),
                 ["seed"] = opt.Seed.ToString(),
+                ["focusRegions"] = opt.FocusRegions.Count.ToString(),
+                ["focusWords"] = opt.FocusRegions.Sum(r => r.End - r.Start).ToString(),
             },
         };
         result.Classes = stream.PositionsByClass().Count;
@@ -478,6 +484,7 @@ public static class MatchEngine
             var stride = Math.Max(60, span / 8);
             for (var w0 = 0; w0 + span <= corpus.Length; w0 += stride)
             {
+                if (opt.FocusRegions.Count > 0 && !InFocus(opt.FocusRegions, w0, w0 + span)) continue;
                 var hi = w0 + span;
                 // Bucket the candidate phrases by how many times they occur inside this window.
                 var buckets = new Dictionary<int, List<(string Phrase, List<int> Inside)>>();
@@ -621,6 +628,13 @@ public static class MatchEngine
     {
         var span = Math.Max(1e-9, hi - lo);
         return positions.Select(p => (p - lo) / span).ToList();
+    }
+
+    /// <summary>A window is inside the focus when its centre falls in a focused region.</summary>
+    private static bool InFocus(List<(int Start, int End)> regions, int w0, int w1)
+    {
+        var centre = (w0 + w1) / 2;
+        return regions.Any(r => centre >= r.Start && centre <= r.End);
     }
 
     private static int CountInRange(List<int> sorted, int lo, int hi)

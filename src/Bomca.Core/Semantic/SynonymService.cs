@@ -38,6 +38,9 @@ public sealed class SynonymService
         ["behold"] = new[] { "see", "look" },
     };
 
+    /// <summary>The built-in synonym table, exposed so the contextual search can run with no model.</summary>
+    public static Dictionary<string, string[]> OfflineFallback() => Offline;
+
     public async Task<List<string>> ExpandAsync(string word, IReadOnlyCollection<string> vocabulary, int max = 12)
     {
         var results = new HashSet<string>(StringComparer.Ordinal) { word };

@@ -10,6 +10,88 @@ namespace Bomca.Cli;
 
 public static partial class App
 {
+    /// <summary>
+    /// Fuzzy contextual search: locate where an approximate paraphrase belongs in the corpus and write a
+    /// focus file the symbol search can be restricted to. This is the short-circuit step: it replaces an
+    /// exhaustive scan of 267k words with a scan of a few thousand.
+    /// </summary>
+    public static int RunFocus(Args args)
+    {
+        var source = args.Get("source", "grover");
+        var claimsPath = Path.Combine(DocumentCatalog.RepoRoot(), "data", "external", $"{source}-claims.json");
+        if (!File.Exists(claimsPath))
+        {
+            Console.Error.WriteLine($"focus: no claim file at {claimsPath}");
+            return 1;
+        }
+        var claims = ClaimVerifier.Load(claimsPath);
+
+        var corpusPath = Path.Combine(DerivedDir, args.Get("edition", "current") + ".json");
+        if (!File.Exists(corpusPath))
+        {
+            Console.Error.WriteLine("focus: corpus missing (run: bomca corpus fetch)");
+            return 1;
+        }
+        var corpus = CorpusIndex.Build(JsonIo.Read<CorpusFile>(corpusPath));
+
+        var opt = new Bomca.Core.Semantic.ContextualSearchOptions
+        {
+            Window = args.GetInt("window", 700),
+            Stride = args.GetInt("stride", 150),
+            TopWindows = args.GetInt("top-windows", 12),
+            TopRegionsPerSegment = args.GetInt("regions-per-segment", 2),
+            MaxRegions = args.GetInt("max-regions", 6),
+            Controls = args.GetInt("controls", 40),
+            UseSynonyms = !args.Has("no-synonyms"),
+            UseEmbeddings = args.Has("embeddings"),
+        };
+
+        Func<string, IReadOnlyCollection<string>, Task<List<string>>>? expander = null;
+        if (args.Has("llm"))
+        {
+            var svc = new Bomca.Core.Semantic.SynonymService(enabled: true);
+            expander = (term, vocab) => svc.ExpandAsync(term, vocab);
+        }
+
+        var result = Bomca.Core.Semantic.ContextualSearch.Build(
+            corpus, claims.Segments.Count > 0 ? "W" : "W", claims.Source,
+            claims.Segments.Select(sg => (sg.Name, sg.Translation)).ToList(),
+            opt, expander, Console.WriteLine);
+
+        // Verse-level ranking for the report.
+        var verseRanking = new Dictionary<string, object>();
+        foreach (var sg in claims.Segments)
+        {
+            var ranked = Bomca.Core.Semantic.ContextualSearch.RankVerses(corpus, sg.Translation)
+                .Take(15)
+                .Select(r => new
+                {
+                    reference = r.Verse.Ref,
+                    score = JsonIo.Round(r.Score, 4),
+                    matched = r.Matched,
+                    text = r.Verse.Text.Length > 220 ? r.Verse.Text[..220] + "..." : r.Verse.Text,
+                })
+                .ToList();
+            verseRanking[sg.Name] = ranked;
+        }
+
+        var dir = Path.Combine(OutRoot, "W");
+        Directory.CreateDirectory(dir);
+        JsonIo.Write(Path.Combine(dir, $"focus-{source}.json"), result);
+        JsonIo.Write(Path.Combine(dir, $"focus-{source}-verses.json"), verseRanking);
+        Bomca.Core.Reporting.ClaimReportBuilder.WriteFocus(Path.Combine(dir, $"focus-{source}.html"), result, verseRanking);
+
+        Console.WriteLine($"focus {source}: {result.Regions.Count} region(s) covering {result.FocusCorpusWords:N0} words " +
+                          $"({result.SearchReductionFactor:0.0}x reduction) -> out/W/focus-{source}.json");
+        foreach (var seg in result.Segments)
+        {
+            Console.WriteLine($"  {seg.Name}: best {seg.BestWindowScore:0.000} vs control {seg.ControlMean:0.000} (p {seg.PValue:0.000})");
+            foreach (var r in seg.Regions)
+                Console.WriteLine($"    {r.Reference} [{r.Start}..{r.End}] score {r.Score:0.000}  {r.Snippet}");
+        }
+        return 0;
+    }
+
     public static int RunVerify(Args args)
     {
         var source = args.Get("source", "grover");
